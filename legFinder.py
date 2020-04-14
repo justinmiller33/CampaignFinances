@@ -35,3 +35,4 @@ for j in range(40):
     plt.plot(x,y)
     
 plt.show()
+
