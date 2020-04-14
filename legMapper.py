@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 sf = shapefile.Reader("/Users/justi/OneDrive/Documents/datasets/OCPF Data/senate2012/SENATE2012_POLY.shp")
 
-for j in range(40):
+for j in range(37,38):
     feature = sf.shapeRecords()[j]
     first = feature.shape.__geo_interface__
 
