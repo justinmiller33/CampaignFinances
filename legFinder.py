@@ -2,6 +2,9 @@ import shapefile
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import pyproj
+from geopy.geocoders import Nominatim
+geolocator = Nominatim(user_agent = "My Application")
 
 #Reading Data from .shp file
 sf = shapefile.Reader("/Users/justi/OneDrive/Documents/datasets/OCPF Data/senate2012/SENATE2012_POLY.shp")
@@ -90,13 +93,34 @@ def algorithm(data, meters):
     else:
         return crosses
 
+#Getting coordinates from address   
+def coordLookup(street,city,state,postalcode):
+    #Creating dict of address
+    address = dict({"street":street, "city":city, "state":state, "postalcode":postalcode})
+
+    #Running through Nominatim's API
+    location = geolocator.geocode(address)
+
+    #Coords stored as tuple
+    coordinates = location[1]
+    return coordinates
+
+#Converting from coordinates to LCC
+p = pyproj.Proj(proj='lcc',lat_1 = 41.71666666, lat_2=42.68333,lon_0=-71.5,x_0=200000,y_0=750000, lat_0=41)
+def converter(lat,long):
+    return p(long,lat)
 #-------------------------------------------------------------
+
+street = "181 Washington Ave"
+city = "Chelsea"
+state = "MA"
+postalcode = "02150"
 
 length = int(lengthFinder(40))
 df = dataExtract(40,length)
-#coords = coordLookup(address)
-#meters = converter(coords)
-meters = np.array([200000,880000])
+lat,long = coordLookup(street,city,state,postalcode)
+x,y = converter(lat,long)
+meters = np.array([x,y])
 
 district = algorithm(df,meters)
 
