@@ -4,7 +4,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyproj
 from geopy.geocoders import Nominatim
-geolocator = Nominatim(user_agent = "My Application")
 
 #Reading Data from .shp file
 sf = shapefile.Reader("/Users/justi/OneDrive/Documents/datasets/OCPF Data/senate2012/SENATE2012_POLY.shp")
@@ -89,18 +88,20 @@ def algorithm(data, meters):
                 crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
                 
     if sum(crosses%2)==1:
-        return np.argmax(crosses%2)
+        return crosses%2
     else:
         return crosses
 
 #Getting coordinates from address   
 def coordLookup(street,city,state,postalcode):
+
     #Creating dict of address
-    address = dict({"street":street, "city":city, "state":state, "postalcode":postalcode})
+    address = dict({"street":str(street), "city":str(city), "state":str(state), "postalcode":str(postalcode)})
 
     #Running through Nominatim's API
+    geolocator = Nominatim(user_agent = "My Application")
     location = geolocator.geocode(address)
-
+    
     #Coords stored as tuple
     coordinates = location[1]
     return coordinates
@@ -111,18 +112,50 @@ def converter(lat,long):
     return p(long,lat)
 #-------------------------------------------------------------
 
-street = "181 Washington Ave"
-city = "Chelsea"
-state = "MA"
-postalcode = "02150"
-
+#ONLY HAVE TO DO ONCE:
 length = int(lengthFinder(40))
 df = dataExtract(40,length)
-lat,long = coordLookup(street,city,state,postalcode)
-x,y = converter(lat,long)
-meters = np.array([x,y])
 
-district = algorithm(df,meters)
+#Preallocating districts vector and failures
+reps = np.array([])
+diverged = np.array([])
+badAddress = np.array([])
 
-print(district)
+#Loading CSV Data
+names = pd.read_excel("Senate Full Contribution Data.xlsx")
+names = names.to_numpy()
+for i in range(len(names)):
+    if type(names[i][6])!=str:
+        names[i][6]=str(names[i][6])
+        if len(names[i][6])!=5:
+            names[i][6] = "0"+names[i][6]
+"""
+street=np.array(["59 Valley St","15 Golden Rd","410 Chebacco Road","1 Beacon Street"])
+city=np.array(["Adams","Stoughton","South Hamilton","Boston"])
+state=np.array(["MA","MA","MA","MA"])
+postalcode=np.array(["01220","02072","01982","02108"])
+"""
+
+print("loaded")
+
+#Loop through csv of people
+for i in range(5000):
+    try:
+        lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
+    except:
+        badAddress = np.append(badAddress,[i])
+        continue
+    
+    x,y = converter(lat,long)
+    meters = np.array([x,y])
+
+    district = algorithm(df,meters)
+    if sum(district)==1:
+        reps=np.append(reps,[np.argmax(district)])
+    else:
+        diverged=np.append(diverged,[i])
+        
+print(reps)
+print(diverged)
+print(badAddress)
 
