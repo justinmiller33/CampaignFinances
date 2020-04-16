@@ -11,6 +11,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import pyproj
 from geopy.geocoders import Nominatim
+import time
 
 #Loop to extract [x,y] file of all points for one senate district
 def shpLoop(j):
@@ -47,7 +48,6 @@ def shpLoop(j):
 
     return (x,y)
 
-
 #Finding the number of points that make up each district's defining polygon
 def lengthFinder(numDistricts):
 
@@ -61,7 +61,6 @@ def lengthFinder(numDistricts):
 
     #Removing extraneous ends and returning length    
     return(sum(maxLengths)-39)
-
 
 #Extracting data in a structure for the polygon locating algorithm
 #Matrix for statewide polygon vertices with [x1,x2,y1,y2,district] for rows
@@ -120,7 +119,6 @@ def algorithm(data, meters):
     else:
         return crosses
 
-
 #Getting coordinates from address   
 def coordLookup(street,city,state,postalcode):
 
@@ -139,9 +137,13 @@ def coordLookup(street,city,state,postalcode):
 p = pyproj.Proj(proj='lcc',lat_1 = 41.71666666, lat_2=42.68333,lon_0=-71.5,x_0=200000,y_0=750000, lat_0=41)
 def converter(lat,long):
     return p(long,lat)
-#----------------------------------------------------------------------
+
 
 #----------------------------------------------------------------------
+#START OF FUNCTION CALLING!
+#Processing data... Runtime = 15 seconds
+#----------------------------------------------------------------------
+
 #Reading Data from .shp file
 #NOTE: THIS IS MY DATA PATH IT MUST BE ADJUSTED
 sf = shapefile.Reader("/Users/justi/OneDrive/Documents/datasets/OCPF Data/senate2012/SENATE2012_POLY.shp")
@@ -169,21 +171,24 @@ for i in range(len(names)):
         if len(names[i][6])!=5:
             names[i][6] = "0"+names[i][6]
 
+#----------------------------------------------------------------------
 #Indicating start of heavy loop
 print("loaded")
-#----------------------------------------------------------------------
+
 #Loop through csv of people
-for i in range(len(names)):
+for i in range(100):
 
     #Find coordinates from address
     #Exception handle in case address is incorrectly entered
-    #NOTE: WILL RETURN NULL VALUE IF API VALIDATION FAILS 
+    #NOTE: WILL RETURN NULL VALUE IF API VALIDATION FAILS
+    time.sleep(1)
     try:
         lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
 
     except:
         #Record if geolocating fails
         badAddress = np.append(badAddress,[i])
+        print("bad address")
         continue
 
     #Converting latitude longitude to the custom LCC projection used for MA
@@ -196,7 +201,7 @@ for i in range(len(names)):
     #If it returns boolean array with only 1 true, assign that as our district
     if sum(district)==1:
         reps=np.append(reps,[np.argmax(district)])
-
+        print(np.argmax(district))
     #If not, assume that the polygon location test diverged/failed
     else:
         diverged=np.append(diverged,[i])
