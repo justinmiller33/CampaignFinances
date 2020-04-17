@@ -264,7 +264,7 @@ for i in range(len(names)):
         diverged=np.append(diverged,[i])
         #print("diverged")
     #print(time.time()-t)
-    if i%1000 = 0:
+    if i%1000 == 0:
         print(i)
         print(time.time()-t)
     
