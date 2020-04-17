@@ -89,6 +89,7 @@ def dataExtract(numDistricts, length):
 
     return(df)
 
+
 #Algorithm to determine which polygon the point is inside of
 def algorithm(data, meters):
     
@@ -103,11 +104,19 @@ def algorithm(data, meters):
         if data[i,0] > meters[0] or data[i,1] > meters[0]:
 
             #Find if either vertex is to the right of the point
-            #NOTE: NEED TO IMPLEMENT SLOPE-BASED ASSIGNMENT
-            #AROUND 5% OF VALUES ARE READING INCONCLUSIVE
             if data[i,2] < meters[1] and data[i,3] > meters[1] or data[i,2] > meters[1] and data[i,3] < meters[1]:
-                #Counting Number of Crosses           
-                crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
+
+                #If so, find if the point is to the left of the slope  
+                slope = (data[i,3]-data[i,2])/(data[i,1]-data[i,0])
+                if slope >= 0:
+                    if y > slope*(meters[0]-data[i,0])+data[i,2]:
+                        crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
+                        
+                if slope <= 0:
+                    if y < slope*(meters[0]-data[i,0])+data[i,2]:
+                        crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
+                          
+           
 
     #If crosses are odd we're in that district!
     #Returns a boolean array for crosses
@@ -119,6 +128,37 @@ def algorithm(data, meters):
     else:
         return crosses
 
+#Normalizing street names to ensure proper geolocation
+def checkAdd(street):
+    #Universalizing to lower case
+    adNormal = street.lower()
+
+    #Stopwords and list of letters
+    stopwords = ["st","street","rd","road","lane","ln","ave","avenue","circle","cir","court","ct","plaza","plz","alley","aly","terrace","ter"]
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+
+    #Looping through each stopword
+    for i in range(len(stopwords)):
+
+        #If there is a stopword in the address
+        if stopwords[i] in adNormal:
+
+            #Index the location
+            ind = adNormal.index(stopwords[i])
+            
+            #Check to see if it's a part of the name
+            try:
+                if adNormal[ind-1] or adNormal[ind+1] in alphabet:
+                    ind = adNormal.index(stopwords[i],ind+1)
+            except:
+                ind = ind
+
+            #Cut the street name so it ends after the suffix
+            ind = ind + len(stopwords[i])
+            realAdd = adNormal[:ind]
+
+            return realAdd
+            
 #Getting coordinates from address   
 def coordLookup(street,city,state,postalcode):
 
@@ -157,6 +197,7 @@ df = dataExtract(40,length)
 reps = np.array([])
 diverged = np.array([])
 badAddress = np.array([])
+outOfState = np.array([])
 
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
@@ -171,22 +212,35 @@ for i in range(len(names)):
         if len(names[i][6])!=5:
             names[i][6] = "0"+names[i][6]
 
+#Deleting PO Boxes and Apt numbers which invalidate geolocation
+for i in range(len(names)):
+    try:
+        temp = checkAdd(names[i][3])
+        if type(temp) == str:
+            names[i][3] = temp
+    except:
+        continue
 #----------------------------------------------------------------------
 #Indicating start of heavy loop
 print("loaded")
 
 #Loop through csv of people
 for i in range(100):
-
-    #Find coordinates from address
-    #Exception handle in case address is incorrectly entered
-    #NOTE: WILL RETURN NULL VALUE IF API VALIDATION FAILS
+    t=time.time()
+    #Adding time to comply with api 1 request per second rule
     time.sleep(1)
+
+    #Find coordinates from address and check to see it's in state
+    #Exception handler for invalid adresses
     try:
         lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
+        #Check for out of state only if address is valid
+        if names[i][5]!="MA":
+            outOfState = np.append(outOfState, [i])
+            continue
 
     except:
-        #Record if geolocating fails
+        #If geolocation fails, adress is invalid
         badAddress = np.append(badAddress,[i])
         print("bad address")
         continue
@@ -205,9 +259,12 @@ for i in range(100):
     #If not, assume that the polygon location test diverged/failed
     else:
         diverged=np.append(diverged,[i])
-
+        print("diverged")
+    print(time.time()-t)
+    
 #Analyzing test        
 print(reps)
+print(outOfState)
 print(diverged)
 print(badAddress)
 #----------------------------------------------------------------------
