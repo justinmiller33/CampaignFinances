@@ -13,6 +13,8 @@ import pyproj
 from geopy.geocoders import Nominatim
 import time
 
+t = time.time()
+
 #Loop to extract [x,y] file of all points for one senate district
 def shpLoop(j):
     
@@ -108,18 +110,19 @@ def algorithm(data, meters):
 
                 #If so, find if the point is to the left of the slope  
                 slope = (data[i,3]-data[i,2])/(data[i,1]-data[i,0])
+
+                #For positive slopes, point is left of edge if above it
                 if slope >= 0:
                     if y > slope*(meters[0]-data[i,0])+data[i,2]:
                         crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
-                        
+
+                #For negative slopes, point is left of edge if below it
                 if slope <= 0:
                     if y < slope*(meters[0]-data[i,0])+data[i,2]:
                         crosses[int(data[i,4])] = crosses[int(data[i,4])]+1
                           
-           
-
     #If crosses are odd we're in that district!
-    #Returns a boolean array for crosses
+    #Returns a boolean array for crosses.
     if sum(crosses%2)==1:
         return crosses%2
     
@@ -225,10 +228,10 @@ for i in range(len(names)):
 print("loaded")
 
 #Loop through csv of people
-for i in range(100):
+for i in range(len(names)):
     t=time.time()
     #Adding time to comply with api 1 request per second rule
-    time.sleep(1)
+    time.sleep(0.75)
 
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses
@@ -242,7 +245,7 @@ for i in range(100):
     except:
         #If geolocation fails, adress is invalid
         badAddress = np.append(badAddress,[i])
-        print("bad address")
+        #print("bad address")
         continue
 
     #Converting latitude longitude to the custom LCC projection used for MA
@@ -255,12 +258,15 @@ for i in range(100):
     #If it returns boolean array with only 1 true, assign that as our district
     if sum(district)==1:
         reps=np.append(reps,[np.argmax(district)])
-        print(np.argmax(district))
+        #print(np.argmax(district))
     #If not, assume that the polygon location test diverged/failed
     else:
         diverged=np.append(diverged,[i])
-        print("diverged")
-    print(time.time()-t)
+        #print("diverged")
+    #print(time.time()-t)
+    if i%1000 = 0:
+        print(i)
+        print(time.time()-t)
     
 #Analyzing test        
 print(reps)
