@@ -1,0 +1,205 @@
+---
+title: "Senate Data Exploration"
+author: "Sethu Odayappan"
+date: "4/16/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+install.packages('dplyr')
+library(dplyr)
+```
+
+```{r}
+#Upload Data
+senate = read.csv("UpdatedSenateData.csv")
+district = read.csv("DistrictOnly.csv")
+
+#Collapse Data to Organize by Senator for donations less than $1000
+senate$Districtnumber = district 
+data_under1000 = senate[senate$Amount<=1000,]
+byrep = group_by (data_under1000, Recipient)
+reps <- summarise(byrep, AverageContribution = mean(Amount, na.rm = TRUE), TotalAmount = sum(Amount, na.rm=TRUE))
+colnames(reps)=c("Senator", "Average Contribution", "Total Amount")
+Party = c("D","D","D","D","D","D","D","R","D","D","D","D","D","D","D","D","D","D","R","D","D","D","D","D","D","R","D")
+reps$Party = Party
+```
+
+```{r}
+#Find distribution of error addresses
+badaddress = senate[senate$Districtnumber == "42" | senate$Districtnumber == "43",]
+table(badaddress$Recipient)/table(senate$Recipient)
+```
+
+
+```{r}
+#Subsetting Paul Feeney
+FeeneyAll = subset(senate,Recipient == "Feeney, Paul" )
+
+Feeney_under1000 = subset(FeeneyAll, Amount <= 1000)
+
+Feeney_under1000_individual = subset(data_under1000, Recipient == "Feeney, Paul" & Record.Type.Description == "Individual")
+
+Feeneydistrict_under1000 = subset(Feeney_under1000_individual, (City == "Mansfield" | City == "Walpole" | City == "Norton" | City == "Seekonk"| City == "Rehoboth" | City == "Attleboro" | City== "Foxborough" | City == "Medfield" | City == "Sharon"))
+
+S9a = sum(Feeneydistrict_under1000$Amount)/sum(Feeney_under1000_individual$Amount)
+S9b= sum(Feeneydistrict_under1000$Amount)/sum(FeeneyAll$Amount)
+S9c=sum(Feeneydistrict_under1000$Amount)/sum(Feeney_under1000$Amount)
+```
+
+```{r}
+#Subsetting Michael Barrett
+BarrettAll = subset(senate, Recipient == "Barrett, Michael J." )
+
+Barrett_under1000 = subset(BarrettAll, Amount <= 1000)
+
+Barrett_under1000_individual = subset(Barrett_under1000, Record.Type.Description == "Individual")
+
+Barrettdistrict_under1000 = subset(Barrett_under1000_individual, (City == "Waltham" | City == "Bedford" | City == "Carlisle" | City == "Chelmsford"| City == "Concord" | City == "Lexington" | City== "Lincoln" | City == "Sudbury" | City == "Weston"))
+
+S1a = sum(Barrettdistrict_under1000$Amount)/sum(Barrett_under1000_individual$Amount)
+S1b= sum(Barrettdistrict_under1000$Amount)/sum(BarrettAll$Amount)
+S1c=sum(Barrettdistrict_under1000$Amount)/sum(Barrett_under1000$Amount)
+```
+
+```{r}
+#Subsetting Joseph Boncore
+BoncoreAll = subset(senate, Recipient == "Boncore, Joseph Angelo" )
+
+Boncore_under1000 = subset(BoncoreAll, Amount <= 1000)
+
+Boncore_under1000_individual = subset(Boncore_under1000, Record.Type.Description == "Individual")
+
+Boncoredistrict_under1000 = subset(Boncore_under1000_individual, (City == "Boston" | City == "Revere" | City == "Winthrop" | City == "Cambridge"))
+
+S2a = sum(Boncoredistrict_under1000$Amount)/sum(Boncore_under1000_individual$Amount)
+S2b= sum(Boncoredistrict_under1000$Amount)/sum(BoncoreAll$Amount)
+S2c=sum(Boncoredistrict_under1000$Amount)/sum(Boncore_under1000$Amount)
+```
+
+```{r}
+#Subsetting Michael Brady
+BradyAll = subset(senate, Recipient == "Brady, Michael D." )
+
+Brady_under1000 = subset(BradyAll, Amount <= 1000)
+
+Brady_under1000_individual = subset(Brady_under1000, Record.Type.Description == "Individual")
+
+Bradydistrict_under1000 = subset(Brady_under1000_individual, (City == "Brockton" | City == "East Bridgewater" | City == "Halifax" | City == "Hanover" | City == "Hampton" | City == "Plympton" | City == "Whitman" | City == "Easton"))
+
+S3a = sum(Bradydistrict_under1000$Amount)/sum(Brady_under1000_individual$Amount)
+S3b= sum(Bradydistrict_under1000$Amount)/sum(BradyAll$Amount)
+S3c=sum(Bradydistrict_under1000$Amount)/sum(Brady_under1000$Amount)
+```
+
+```{r}
+#Subsetting Harriette Chandler
+ChandlerAll = subset(senate, Recipient == "Chandler, Harriette L." )
+
+Chandler_under1000 = subset(ChandlerAll, Amount <= 1000)
+
+Chandler_under1000_individual = subset(Chandler_under1000, Record.Type.Description == "Individual")
+
+Chandlerdistrict_under1000 = subset(Chandler_under1000_individual, (City == "Boylston" | City == "Clinton" | City == "Holden" | City == "Northborough" | City == "Princeton" | City == "West Boylston" | City == "Worcester"))
+
+S4a = sum(Chandlerdistrict_under1000$Amount)/sum(Chandler_under1000_individual$Amount)
+S4b= sum(Chandlerdistrict_under1000$Amount)/sum(ChandlerAll$Amount)
+S4c=sum(Chandlerdistrict_under1000$Amount)/sum(Chandler_under1000$Amount)
+```
+
+```{r}
+#Subsetting Harriette Finegold
+FinegoldAll = subset(senate, Recipient == "Finegold, Barry R." )
+
+Finegold_under1000 = subset(FinegoldAll, Amount <= 1000)
+
+Finegold_under1000_individual = subset(Finegold_under1000, Record.Type.Description == "Individual")
+
+Finegolddistrict_under1000 = subset(Finegold_under1000_individual, (City == "Lawrence" | City == "Andover" | City == "Tewksbury" | City == "Dracut"))
+
+S10a = sum(Finegolddistrict_under1000$Amount)/sum(Finegold_under1000_individual$Amount)
+S10b= sum(Finegolddistrict_under1000$Amount)/sum(FinegoldAll$Amount)
+S10c=sum(Finegolddistrict_under1000$Amount)/sum(Finegold_under1000$Amount)
+```
+
+```{r}
+#Subsetting Joanne Comerford
+ComerfordAll = subset(senate, Recipient == "Comerford, Joanne" )
+
+Comerford_under1000 = subset(ComerfordAll, Amount <= 1000)
+
+Comerford_under1000_individual = subset(Comerford_under1000, Record.Type.Description == "Individual")
+
+Comerforddistrict_under1000 = subset(Comerford_under1000_individual, (City == "Northampton" | City == "Amherst" | City == "Hadley" | City == "Hatfield" | City == "Pelham" | City == "South Hadley" | City == "Bernardston" | City == "Colrain" | City == "Deerfield" | City == "Erving" | City == "Gill" | City == "Greenfield" | City== "Leverett" | City == "Leyden" | City=="Montague" | City == "New Salem" | City == "Northfield" | City == "Orange" | City == "Shutesbury" | City == "Warwick" | City == "Sunderland" | City == "Wendell" | City == "Whately" | City == "Royalston"))
+
+S5a = sum(Comerforddistrict_under1000$Amount)/sum(Comerford_under1000_individual$Amount)
+S5b= sum(Comerforddistrict_under1000$Amount)/sum(ComerfordAll$Amount)
+S5c=sum(Comerforddistrict_under1000$Amount)/sum(Comerford_under1000$Amount)
+```
+
+```{r}
+#Subsetting Julian Cyr
+CyrAll = subset(senate, Recipient == "Cyr, Julian Andre" )
+
+Cyr_under1000 = subset(CyrAll, Amount <= 1000)
+
+Cyr_under1000_individual = subset(Cyr_under1000, Record.Type.Description == "Individual")
+
+Cyrdistrict_under1000 = subset(Cyr_under1000_individual, (City == "Barnstable" | City == "Brewster" | City == "Chatham" | City == "Dennis" | City == "Eastham" | City == "Harwich" | City == "Mashpee" | City == "Orleans" | City == "Provincetown" | City == "Truro" | City == "Wellfleet" | City == "Yarmouth" | City== "Aquinnah" | City == "Chilmark" | City=="Edgartown" | City == "Gosnold" | City == "Oak Bluffs" | City == "Tissbury" | City == "West Tisbury" | City == "Nantucket"))
+
+S6a = sum(Cyrdistrict_under1000$Amount)/sum(Cyr_under1000_individual$Amount)
+S6b= sum(Cyrdistrict_under1000$Amount)/sum(CyrAll$Amount)
+S6c=sum(Cyrdistrict_under1000$Amount)/sum(Cyr_under1000$Amount)
+```
+
+```{r}
+#Subsetting James Eldridge
+EldridgeAll = subset(senate, Recipient == "Eldridge, James" )
+
+Eldridge_under1000 = subset(EldridgeAll, Amount <= 1000)
+
+Eldridge_under1000_individual = subset(Eldridge_under1000, Record.Type.Description == "Individual")
+
+Eldridgedistrict_under1000 = subset(Eldridge_under1000_individual, (City == "Marlborough" | City == "Acton" | City == "Ayer" | City == "Boxborough" | City == "Hudson" | City == "Littleton" | City == "Maynard" | City == "Shirley" | City == "Stow" | City == "Sudbury" | City == "Harvard" | City == "Northborough" | City== "Southborough" | City == "Westborough"))
+
+S7a = sum(Eldridgedistrict_under1000$Amount)/sum(Eldridge_under1000_individual$Amount)
+S7b= sum(Eldridgedistrict_under1000$Amount)/sum(EldridgeAll$Amount)
+S7c=sum(Eldridgedistrict_under1000$Amount)/sum(Eldridge_under1000$Amount)
+```
+
+```{r}
+#Subsetting Ryan Fattman
+FattmanAll = subset(senate, Recipient == "Fattman, Ryan" )
+
+Fattman_under1000 = subset(FattmanAll, Amount <= 1000)
+
+Fattman_under1000_individual = subset(Fattman_under1000, Record.Type.Description == "Individual")
+
+Fattmandistrict_under1000 = subset(Fattman_under1000_individual, (City == "Blackston" | City == "Douglas" | City == "Dudley" | City == "Hopedale" | City == "Mendon" | City == "Milford" | City == "Millville" | City == "Northbridge" | City == "Oxford" | City == "Southbridge" | City == "Sutton" | City == "Uxbridge" | City== "Webster" | City == "Bellingham"))
+
+S8a = sum(Fattmandistrict_under1000$Amount)/sum(Fattman_under1000_individual$Amount)
+S8b= sum(Fattmandistrict_under1000$Amount)/sum(FattmanAll$Amount)
+S8c=sum(Fattmandistrict_under1000$Amount)/sum(Fattman_under1000$Amount)
+```
+
+```{r}
+#Subsetting Anne Gobi
+GobiAll = subset(senate, Recipient == "Gobi, Anne M." )
+
+Gobi_under1000 = subset(GobiAll, Amount <= 1000)
+
+Gobi_under1000_individual = subset(Gobi_under1000, Record.Type.Description == "Individual")
+
+Gobidistrict_under1000 = subset(Gobi_under1000_individual, (City == "Ashburnham" | City == "Athol" | City == "Barre" | City == "Brookfield" | City == "Charlton" | City == "East Brookfield" | City == "Hardwick" | City == "Hubbardston" | City == "New Braintree" | City == "North Brookfield" | City == "Oakham" | City == "Paxton" | City== "Petersham" | City == "Phillipston" | City == "Rutland" | City == "Spencer" | City == "Sturbridge" | City == "Templeton" | City == "Warren" | City == "West Brookfield" | City == "Winchendon" | City == "Brimfield" | City == "Holland" | City== "Monson" | City == "Palmer" | City == "Wales" | City == "Ware" | City== "Ashby"))
+
+S11a = sum(Gobidistrict_under1000$Amount)/sum(Gobi_under1000_individual$Amount)
+S11b= sum(Gobidistrict_under1000$Amount)/sum(GobiAll$Amount)
+S11c=sum(Gobidistrict_under1000$Amount)/sum(Gobi_under1000$Amount)
+```
+
