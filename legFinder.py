@@ -209,11 +209,29 @@ names = names.to_numpy()
 
 #Converting zipcodes to 5-digit strings (2048-->"02048")
 #Needed for geolocating
+#For test two, we are updating those with 9-digit zip codes and only running them
+#Array for the ones we missed in test one
+toTest = np.array([])
 for i in range(len(names)):
-    if type(names[i][6])!=str:
-        names[i][6]=str(names[i][6])
-        if len(names[i][6])!=5:
-            names[i][6] = "0"+names[i][6]
+
+    #Making all zipcodes strings
+    names[i][6]=str(names[i][6])
+
+    #Cutting it down to the first 5 digits with a zero at the start(MA)
+    if len(names[i][6]) > 5:
+        
+        toTest = np.append(toTest, [i])
+        
+        if (names[i][6][0] != "0"):
+            names[i][6] = names[i][6][0:4]
+        else:
+            names[i][6] = names[i][6][0:5]
+
+    if len(names[i][6])!=5:
+        names[i][6] = "0"+names[i][6]
+
+#Modifying toTest array to runable integers
+toTest = toTest.astype(int)
 
 #Deleting PO Boxes and Apt numbers which invalidate geolocation
 for i in range(len(names)):
@@ -223,12 +241,13 @@ for i in range(len(names)):
             names[i][3] = temp
     except:
         continue
+
 #----------------------------------------------------------------------
 #Indicating start of heavy loop
 print("loaded")
 
 #Loop through csv of people
-for i in range(len(names)):
+for i in range(len(toTest)):
     t=time.time()
     #Adding time to comply with api 1 request per second rule
     time.sleep(0.75)
@@ -236,15 +255,15 @@ for i in range(len(names)):
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses
     try:
-        lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
+        lat,long = coordLookup(names[toTest[i]][3],names[toTest[i]][4],names[toTest[i]][5],names[toTest[i]][6])
         #Check for out of state only if address is valid
-        if names[i][5]!="MA":
-            outOfState = np.append(outOfState, [i])
+        if names[toTest[i]][5]!="MA":
+            outOfState = np.append(outOfState, [toTest[i]])
             continue
 
     except:
         #If geolocation fails, adress is invalid
-        badAddress = np.append(badAddress,[i])
+        badAddress = np.append(badAddress,[toTest[i]])
         #print("bad address")
         continue
 
@@ -261,7 +280,7 @@ for i in range(len(names)):
         #print(np.argmax(district))
     #If not, assume that the polygon location test diverged/failed
     else:
-        diverged=np.append(diverged,[i])
+        diverged=np.append(diverged,[toTest[i]])
         #print("diverged")
     #print(time.time()-t)
     if i%1000 == 0:
@@ -275,3 +294,4 @@ print(diverged)
 print(badAddress)
 #----------------------------------------------------------------------
 #End of File
+
