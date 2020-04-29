@@ -31,7 +31,7 @@ for i = 1:height(donations)
     city = lower(string(donations(i,:).City));
     if donations(i,:).VarName24 == distNum || city == "Ashland" || city == "Framingham" || city == "Holliston" || city == "Hopkinton" || city == "Medway"
         inDistrict = [inDistrict,1];
-    elseif city == "Natick" || city == "Franklin" || city == "<missing>"
+    elseif city == "Natick" || city == "Franklin" || ismissing(donations(i,:).City)
         inDistrict = [inDistrict,NaN];
     else 
         inDistrict = [inDistrict,0];
@@ -41,6 +41,7 @@ for i = 1:height(donations)
     count = count+1;
 end
 
+unknown = find(ismissing(inDistrict)==1)
 inDistrictAmount = amount.*inDistrict;
 outDistrictAmount = amount - inDistrictAmount;
 
@@ -60,11 +61,17 @@ sxOut = [0];
 for i = 2:length(outDistrictAmount)+1
     sxOut = [sxOut,sxOut(i-1)+outDistrictAmount(i-1)];
 end
-
+%% 
+%For helping with plots
+adjOutDistrictAmount = [zeros(length(inDistrictAmount),1);outDistrictAmount];
 figure()
-area(outDistrictAmount)
+area(adjOutDistrictAmount)
 hold on
 area(inDistrictAmount)
 hold off
 
 figure()
+plot(sxOut,'LineWidth',5)
+hold on
+plot(sxIn,'LineWidth',5)
+hold off

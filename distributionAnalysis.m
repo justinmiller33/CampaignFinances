@@ -31,7 +31,7 @@ for i = 1:height(donations)
     city = lower(string(donations(i,:).City));
     if donations(i,:).VarName24 == distNum || city == "Ashland" || city == "Framingham" || city == "Holliston" || city == "Hopkinton" || city == "Medway"
         inDistrict = [inDistrict,1];
-    elseif city == "Natick" || city == "Franklin" || city == "<missing>"
+    elseif city == "Natick" || city == "Franklin" || ismissing(donations(i,:).City)
         inDistrict = [inDistrict,NaN];
     else 
         inDistrict = [inDistrict,0];
@@ -40,12 +40,15 @@ for i = 1:height(donations)
     donorIndices = [donorIndices, count];
     count = count+1;
 end
+%% 
+
+unknown = find(ismissing(inDistrict)==1);
 
 inDistrictAmount = amount.*inDistrict;
 outDistrictAmount = amount - inDistrictAmount;
 
-inDistrictAmount = nonzeros(inDistrictAmount);
-outDistrictAmount = nonzeros(outDistrictAmount);
+inDistrictAmount = rmmissing(nonzeros(inDistrictAmount));
+outDistrictAmount = rmmissing(nonzeros(outDistrictAmount));
 %% 
 
 %Accumulation function visualization
@@ -60,6 +63,11 @@ sxOut = [0];
 for i = 2:length(outDistrictAmount)+1
     sxOut = [sxOut,sxOut(i-1)+outDistrictAmount(i-1)];
 end
+
+sxUk = [0];
+for i = 2:length(unknown)+1
+    sxUk = [sxUk,sxUk(i-1)+ amount(unknown(i-1))];
+end
 %% 
 %For helping with plots
 adjOutDistrictAmount = [zeros(length(inDistrictAmount),1);outDistrictAmount];
@@ -67,10 +75,12 @@ figure()
 area(adjOutDistrictAmount)
 hold on
 area(inDistrictAmount)
+area(sort(amount(unknown)))
 hold off
 
 figure()
 plot(sxOut,'LineWidth',5)
 hold on
 plot(sxIn,'LineWidth',5)
+plot(sxUk, 'LineWidth',5)
 hold off
