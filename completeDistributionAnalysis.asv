@@ -6,79 +6,15 @@
 %load('demographics.mat');
 
 %List of Reps
-reps = ["Feeney, Paul"];
+reps = [
 %Parallel list of distNums
-distNums = [32];
-
+distNums = [
 %Parallel list of towns completely covered
-townsC = cell(length(reps),1);
-townsC{1} = ["Mansfield","Norton","Seekonk","Rehoboth","Foxborough","Medfield","Sharon","Foxboro"];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-townsC{1} = [];
-
+townsC = [
 %Parallel list of towns partially covered
-townsP = cell(length(reps),1);
-townsP{1} = ["Attleboro","Walpole","East Walpole"];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
-townsP{1} = [];
+townsP = [
 
-%Cell structure with amounts per rep per district status(in,out,unknown)
-data = cell(length(reps),3);
-
+amounts = cell(1,length(reps));
 
 for rep = 1:length(reps)
     amount = [];
@@ -121,18 +57,12 @@ for rep = 1:length(reps)
     %% 
 
     unknown = find(ismissing(inDistrict)==1);
-    ukAmount = amount(unknown)
-    
+
     inDistrictAmount = amount.*inDistrict;
     outDistrictAmount = amount - inDistrictAmount;
 
     inDistrictAmount = rmmissing(nonzeros(inDistrictAmount));
     outDistrictAmount = rmmissing(nonzeros(outDistrictAmount));
-    
-    data{rep,1} = inDistrictAmount;
-    data{rep,2} = outDistrictAmount;
-    data{rep,3} = ukAmount;
-    
     %% 
 
     %Accumulation function visualization
@@ -160,7 +90,6 @@ for rep = 1:length(reps)
     hold on
     area(inDistrictAmount)
     area(sort(amount(unknown)))
-    title(reps(rep))
     hold off
 
     figure()
@@ -168,7 +97,6 @@ for rep = 1:length(reps)
     hold on
     plot(sxIn,'LineWidth',5)
     plot(sxUk, 'LineWidth',5)
-    title(reps(rep))
     hold off
 
 end
