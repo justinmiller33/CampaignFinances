@@ -1,14 +1,20 @@
  %Analyzing Continuous Contribution Data
 
- %load('data.mat')
- sums
+ load('data.mat')
+ sums = [];
+ cp = 50
  for i=1:length(reps)
      
  [overallData] = overallComp(i,data,reps);
- sums
+ overallData = overallData(1:find(overallData<=1000)(1))
+ sums = [sums,sum(overallData(find(overallData<=cp)))/sum(overallData)]; 
  
  
  end
+ 
+ mdl = fitlm(demographics.DistrictMedianHouseholdIncome,sums)
+ 
+ plot(demographics.DistrictMedianHouseholdIncome,sums,'r*')
 % %In out Comparisons 
 % grassrootsA = [];
 % grassrootsB = [];

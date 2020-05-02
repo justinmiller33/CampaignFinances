@@ -1,11 +1,15 @@
  %Analyzing Continuous Contribution Data
 
- %load('data.mat')
+ load('data.mat')
  sums = [];
  cp = 50
+ 
+ 
  for i=1:length(reps)
      
  [overallData] = overallComp(i,data,reps);
+ overallData = overallData(1:(min(find(overallData>=1000))));
+ 
  sums = [sums,sum(overallData(find(overallData<=cp)))/sum(overallData)]; 
  
  
