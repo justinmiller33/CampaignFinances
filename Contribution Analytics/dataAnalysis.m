@@ -1,43 +1,43 @@
  %Analyzing Continuous Contribution Data
 
- load('data.mat')
- sums = [];
- cp = 50
+%  load('data3.mat')
+%  sums = [];
+%  cp = 50;
+%  
+%  
+%  for i=1:length(reps)
+%      
+%  [overallData] = overallComp(i,data,reps);
+%  overallData = overallData(1:(min(find(overallData>=1000))));
+%  
+%  sums = [sums,sum(overallData(find(overallData<=cp)))/sum(overallData)]; 
+%  
+%  
+%  end
+%  
+%  mdl = fitlm(demographics.DistrictMedianHouseholdIncome,sums)
+%  
+  plot(demographics.DistrictMedianHouseholdIncome,sums,'r*')
+ %In out Comparisons 
+ grassrootsA = [];
+ grassrootsB = [];
  
+ %Critical point for grassroots support
+ cp = 51;
  
- for i=1:length(reps)
-     
- [overallData] = overallComp(i,data,reps);
- overallData = overallData(1:(min(find(overallData>=1000))));
- 
- sums = [sums,sum(overallData(find(overallData<=cp)))/sum(overallData)]; 
- 
+ for i = 1:length(reps)
+ [inProp, outProp] = aComp(i,data,reps);
+ grassrootsA = [grassrootsA,inProp(cp)];
+ grassrootsB = [grassrootsB,outProp(cp)];
  
  end
+ %finding p-values for various cps
+ mdl = fitlm(demographics.DistrictMedianHouseholdIncome,grassrootsA);
+ mdl.Coefficients.pValue(2)
  
- mdl = fitlm(demographics.DistrictMedianHouseholdIncome,sums)
- 
- plot(demographics.DistrictMedianHouseholdIncome,sums,'r*')
-% %In out Comparisons 
-% grassrootsA = [];
-% grassrootsB = [];
-% 
-% %Critical point for grassroots support
-% cp = 51;
-% 
-% for i = 1:length(reps)
-% [inProp, outProp] = aComp(i,data,reps);
-% grassrootsA = [grassrootsA,inProp(cp)];
-% grassrootsB = [grassrootsB,outProp(cp)];
-% 
-% end
-% %finding p-values for various cps
-% mdl = fitlm(demographics.DistrictMedianHouseholdIncome,grassrootsA);
-% mdl.Coefficients.pValue(2)
-% 
-% plot(demographics.DistrictMedianHouseholdIncome,grassrootsA,'r*')
-%figure()
-%plot(demographics.DistrictMedianHouseholdIncome,grassrootsB,'blue*')
+ plot(demographics.DistrictMedianHouseholdIncome,grassrootsA,'r*')
+figure()
+ plot(demographics.DistrictMedianHouseholdIncome,grassrootsB,'blue*')
 %Plotting
  
 % plt(20,data,reps)

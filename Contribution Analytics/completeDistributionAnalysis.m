@@ -116,13 +116,13 @@ for rep = 1:length(reps)
             
         %If the district doesn't or is unknown, see if towns match
         %If towns match, label boolean as in district
-        elseif find(city == townsC{rep})
+        elseif find(city == lower(townsC{rep}))
             inDistrict = [inDistrict,1];
             
         %If towns are in partial match or are unknown, label as unknown
-        elseif find(city == townsP{rep})
+        elseif find(city == lower(townsP{rep}))
             inDistrict = [inDistrict,NaN];
-        elseif ismissing(donations(i,:).City)
+        elseif ismissing(city)
             inDistrict = [inDistrict,NaN];
         
         %If none of those, label boolean as out of district
@@ -151,9 +151,9 @@ for rep = 1:length(reps)
     outDistrictAmount = rmmissing(nonzeros(outDistrictAmount));
     
     %Save into master data cell
-    data{rep,1} = inDistrictAmount;
-    data{rep,2} = outDistrictAmount;
-    data{rep,3} = ukAmount;
+    data{index,1} = inDistrictAmount;
+    data{index,2} = outDistrictAmount;
+    data{index,3} = ukAmount;
     
     %% THE BELOW Sections are only used when plotting for accumulations.
 
