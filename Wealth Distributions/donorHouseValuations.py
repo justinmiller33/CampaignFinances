@@ -7,12 +7,18 @@ import pandas as pd
 from pyzillow.pyzillow import ZillowWrapper, GetDeepSearchResults
 import time
 
+dataPath = "C:/devel/CampaignFinances/"
+
+names = pd.read_excel(dataPath+"Senate Full Contribution Data.xlsx")
+names = names.to_numpy()
+print(names)
+
 
 #Function to get price for an address
 def getPrice(address, zipcode):
 
     #API Key Validation
-    zillow_data = ZillowWrapper('X1-ZWz1fjckjdd8gb_a2eph')
+    zillow_data = ZillowWrapper()#'X1-ZWz1fjckjdd8gb_a2eph')
 
     #Parsing xml object using pyzillow api
     deep_search_response = zillow_data.get_deep_search_results(address,zipcode)
@@ -63,7 +69,8 @@ for i in range(len(names)):
 #Preallocating
 data = np.zeros((len(names),3))
 for i in range(len(names)):
-    
+
+
     #Concatenating for proper address format
     address = names[i][3]+", "+names[i][4]+", "+names[i][5]
 
