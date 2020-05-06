@@ -7,18 +7,11 @@ import pandas as pd
 from pyzillow.pyzillow import ZillowWrapper, GetDeepSearchResults
 import time
 
-dataPath = "C:/devel/CampaignFinances/"
-
-names = pd.read_excel(dataPath+"Senate Full Contribution Data.xlsx")
-names = names.to_numpy()
-print(names)
-
-
 #Function to get price for an address
 def getPrice(address, zipcode):
 
     #API Key Validation
-    zillow_data = ZillowWrapper()#'X1-ZWz1fjckjdd8gb_a2eph')
+    zillow_data = ZillowWrapper('X1-ZWz1fjckjdd8gb_a2eph')
 
     #Parsing xml object using pyzillow api
     deep_search_response = zillow_data.get_deep_search_results(address,zipcode)
@@ -39,7 +32,8 @@ def getPrice(address, zipcode):
 
 #Importing for master spreadsheet (taken from legFinder.py)
 
-names = pd.read_excel("Senate Full Contribution Data.xlsx")
+dataPath = "C:/devel/CampaignFinances/"
+names = pd.read_excel(dataPath+"Senate Full Contribution Data.xlsx")
 names = names.to_numpy()
 
 #Normalizing zipcodes
@@ -65,19 +59,37 @@ for i in range(len(names)):
 
 #With zipcodes normalized, try to find house zestimates.
 #Following code takes around 0.3-0.4 seconds per address
-        
-#Preallocating
-data = np.zeros((len(names),3))
+
+#Test Representative
+targetRep = "Feeney, Paul"
+
+#Preallocating (1000 is arbitrarily large placeholder, will be deleted later)
+data = np.zeros((1000,3))
+repCount = 0
+
+#Looping through 
 for i in range(len(names)):
 
-
-    #Concatenating for proper address format
-    address = names[i][3]+", "+names[i][4]+", "+names[i][5]
-
-    #Try except in case of bad addresses or missing zestimates
-    try:
-        data[i] = getPrice(address,names[i][6])
+    if names[i,12] == targetRep:
         
-    except:
-        continue
+        #Concatenating for proper address format
+        try:
+            address = names[i][3]+", "+names[i][4]+", "+names[i][5]
+        except:
+            address = ""
+            
+        #Try except in case of bad addresses or missing zestimates
+        #Increasing count to keep placeholders
+        try:
+            data[repCount] = getPrice(address,names[i][6])
+            repCount = repCount+1
+            
+        except:
+            repCount = repCount+1
+            
+
+        print(data[repCount-1])
+        time.sleep(1)
+        
+
 
