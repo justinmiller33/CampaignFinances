@@ -1,0 +1,33 @@
+%Analysis of Wealth Distributions in the Feeney District
+
+load("FeeneyWithHomes1.mat")
+
+%Getting individual's indices and data
+notIndividuals = [];
+
+for i=1:height(FeeneyWithHomes1)
+    if FeeneyWithHomes1.RecordTypeDescription(i) ~= "Individual"
+    notIndividuals = [notIndividuals, i];
+    end
+end
+
+inData = FeeneyWithHomes1;
+inData(notIndividuals,:) = [];
+
+%Excluding Zeros
+inDataNZ = [];
+indexDataNZ = [];
+for i = 1:height(inData)
+    if inData.zestimate(i) ~= 0 
+        indexDataNZ = [indexDataNZ,i];
+        inDataNZ = [inDataNZ, inData.zestimate(i)];
+    end
+end
+
+mdl = fitlm(inDataNZ,inData.Amount(indexDataNZ))
+plot(inDataNZ,inData.Amount(indexDataNZ),'r*')
+
+%In district vs. out of district
+for i=1:length(inDataNZ)
+if inDataNZ
+    
