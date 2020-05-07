@@ -1,17 +1,17 @@
 %Analysis of Wealth Distributions in the Feeney District
 
-load("FeeneyWithHomes1.mat")
+load("FeeneyWithHomes.mat")
 
 %Getting individual's indices and data
 notIndividuals = [];
 
-for i=1:height(FeeneyWithHomes1)
-    if FeeneyWithHomes1.RecordTypeDescription(i) ~= "Individual"
+for i=1:height(FeeneyWithHomes)
+    if FeeneyWithHomes.RecordTypeDescription(i) ~= "Individual"
     notIndividuals = [notIndividuals, i];
     end
 end
 
-inData = FeeneyWithHomes1;
+inData = FeeneyWithHomes;
 inData(notIndividuals,:) = [];
 
 %Excluding Zeros
@@ -38,8 +38,20 @@ for i=1:height(inDataNZ)
     end
 end
         
-mdl = fitlm(inInDataNZ.zestimate,inInDataNZ.Amount,'RobustOpts','on')
-plot(inInDataNZ.zestimate,inInDataNZ.Amount,'r*')
-figure()
-mdl = fitlm(outInDataNZ.zestimate,outInDataNZ.Amount,'RobustOpts','on')
-plot(outInDataNZ.zestimate,outInDataNZ.Amount,'r*')
+%mdl = fitlm(inInDataNZ.zestimate,inInDataNZ.Amount,'RobustOpts','on')
+%plot(inInDataNZ.zestimate,inInDataNZ.Amount,'r*')
+%figure()
+%mdl = fitlm(outInDataNZ.zestimate,outInDataNZ.Amount,'RobustOpts','on')
+%plot(outInDataNZ.zestimate,outInDataNZ.Amount,'r*')
+
+
+%Finding percentage of campaign funds contributed by top 50% 433833
+%CP of 670000 gives a perfect 1:1 ratio
+
+aboveIndices = find(inDataNZ.zestimate>670000);
+belowIndices = find(inDataNZ.zestimate<670000);
+
+aboveAmounts = inDataNZ.Amount(aboveIndices);
+belowAmounts = inDataNZ.Amount(belowIndices);
+
+ratio = sum(aboveAmounts)/sum(belowAmounts)
