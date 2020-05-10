@@ -13,9 +13,9 @@ Wealth Distribution Among Donors
 Representative Effectiveness Rates
 
 ## Navigation
-Senate Full Contribution Data.xlsx: Comprehensive Donation Data for 27 State Senators with Competitive Elections from 2008-Present
-
-Data On Senate Districts.xlsx: Demographic Data on each of the above districts.
+Data Files
+-Senate Full Contribution Data.xlsx: Comprehensive Donation Data for 27 State Senators with Competitive Elections from 2008-Present
+-Data On Senate Districts.xlsx: Demographic Data on each of the above districts.
 
 /District Locating: Testing ratios of In District and Out of District Donations using Shapefile Data
 
