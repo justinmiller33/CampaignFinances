@@ -38,20 +38,22 @@ for i=1:height(inDataNZ)
     end
 end
         
-%mdl = fitlm(inInDataNZ.zestimate,inInDataNZ.Amount,'RobustOpts','on')
-%plot(inInDataNZ.zestimate,inInDataNZ.Amount,'r*')
-%figure()
-%mdl = fitlm(outInDataNZ.zestimate,outInDataNZ.Amount,'RobustOpts','on')
-%plot(outInDataNZ.zestimate,outInDataNZ.Amount,'r*')
+mdl = fitlm(inInDataNZ.zestimate,inInDataNZ.Amount)
+plot(inInDataNZ.zestimate,inInDataNZ.Amount,'r*')
+figure()
+mdl = fitlm(outInDataNZ.zestimate,outInDataNZ.Amount)
+plot(outInDataNZ.zestimate,outInDataNZ.Amount,'r*')
 
 
 %Finding percentage of campaign funds contributed by top 50% 433833
 %CP of 670000 gives a perfect 1:1 ratio
+%Feeney district median home price ~ 470000
 
-aboveIndices = find(inDataNZ.zestimate>670000);
-belowIndices = find(inDataNZ.zestimate<670000);
+aboveIndices = find(inDataNZ.zestimate>470000);
+belowIndices = find(inDataNZ.zestimate<470000);
 
 aboveAmounts = inDataNZ.Amount(aboveIndices);
 belowAmounts = inDataNZ.Amount(belowIndices);
 
 ratio = sum(aboveAmounts)/sum(belowAmounts)
+

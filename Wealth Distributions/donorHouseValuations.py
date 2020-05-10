@@ -68,7 +68,7 @@ data = np.zeros((1000,3))
 repCount = 0
 
 #Looping through 
-for i in range(len(names)):
+for i in range(370,len(names)):
 
     if names[i,12] == targetRep:
         
