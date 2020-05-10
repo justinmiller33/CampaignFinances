@@ -19,21 +19,27 @@ library(dplyr)
 ```{r}
 #Upload Data
 senate = read.csv("UpdatedSenateData.csv")
-district = read.csv("DistrictOnly.csv")
+district = read.csv("Updated Districts - Sheet1.csv")
 
 #Collapse Data to Organize by Senator for donations less than $1000
-senate$Districtnumber = district 
+senate$num= district
 data_under1000 = senate[senate$Amount<=1000,]
 byrep = group_by (data_under1000, Recipient)
 reps <- summarise(byrep, AverageContribution = mean(Amount, na.rm = TRUE), TotalAmount = sum(Amount, na.rm=TRUE))
 colnames(reps)=c("Senator", "Average Contribution", "Total Amount")
 Party = c("D","D","D","D","D","D","D","R","D","D","D","D","D","D","D","D","D","D","R","D","D","D","D","D","D","R","D")
 reps$Party = Party
+Bills = c(30,55,42,46,46,80, 57,48,53, 20, 81, 55, 57, 33, 52, 129, 49, 92, 145, 83, 29, 39, 50,3, 41, 44, 40)
+reps$Bills = Bills
+HomeDistrict = c(103444, 68466, 72439, 106573, 76966, 68902, 103775, 79691, 103937, 70928, 75148, 58877,99174, 101179, 75019, 114894, 73222, 64141, 99174, 74851,113186, 57552, 98642, 100957, 95441, 103775, 52372)
+Hometown = c(162803,69928, 52393, 45869, 62838, 51389, 120865, 45734, 69309, 83910, 52938, 55190, 71808, 48581, 112831, 65528, 65528, 71676, 75892, 56797, 141690, 80840, 71834, 102721, 126000, 51412, 51735 )
+reps$HomeDistrict = HomeDistrict
+reps$Hometown = Hometown
 ```
 
 ```{r}
 #Find distribution of error addresses
-badaddress = senate[senate$Districtnumber == "42" | senate$Districtnumber == "43",]
+badaddress = subset(senate, num == "42" | num == "43")
 table(badaddress$Recipient)/table(senate$Recipient)
 ```
 
@@ -46,11 +52,14 @@ Feeney_under1000 = subset(FeeneyAll, Amount <= 1000)
 
 Feeney_under1000_individual = subset(data_under1000, Recipient == "Feeney, Paul" & Record.Type.Description == "Individual")
 
-Feeneydistrict_under1000 = subset(Feeney_under1000_individual, (City == "Mansfield" | City == "Walpole" | City == "Norton" | City == "Seekonk"| City == "Rehoboth" | City == "Attleboro" | City== "Foxborough" | City == "Medfield" | City == "Sharon"))
+Feeneydistrict_under1000 = subset(Feeney_under1000_individual, (num == "32" | City == "Mansfield" | City == "Norton" | City == "Seekonk"| City == "Rehoboth" | City== "Foxborough" | City == "Medfield" | City == "Sharon" | City == "Foxboro"))
 
 S9a = sum(Feeneydistrict_under1000$Amount)/sum(Feeney_under1000_individual$Amount)
 S9b= sum(Feeneydistrict_under1000$Amount)/sum(FeeneyAll$Amount)
 S9c=sum(Feeneydistrict_under1000$Amount)/sum(Feeney_under1000$Amount)
+
+Feeneyinc = subset(badaddress,Recipient == "Feeney, Paul" & (City == "Attleboro" | City == "Walpole" | City == "East Walpole" | City == ""))
+S9inc = nrow(Feeneyinc)
 ```
 
 ```{r}
@@ -61,11 +70,14 @@ Barrett_under1000 = subset(BarrettAll, Amount <= 1000)
 
 Barrett_under1000_individual = subset(Barrett_under1000, Record.Type.Description == "Individual")
 
-Barrettdistrict_under1000 = subset(Barrett_under1000_individual, (City == "Waltham" | City == "Bedford" | City == "Carlisle" | City == "Chelmsford"| City == "Concord" | City == "Lexington" | City== "Lincoln" | City == "Sudbury" | City == "Weston"))
+Barrettdistrict_under1000 = subset(Barrett_under1000_individual, (num == "6" | City == "Waltham" | City == "Bedford" | City == "Carlisle" | City == "Chelmsford"| City == "Concord" | City== "Lincoln" | City == "Weston"))
 
 S1a = sum(Barrettdistrict_under1000$Amount)/sum(Barrett_under1000_individual$Amount)
 S1b= sum(Barrettdistrict_under1000$Amount)/sum(BarrettAll$Amount)
 S1c=sum(Barrettdistrict_under1000$Amount)/sum(Barrett_under1000$Amount)
+
+Barrettinc = subset(badaddress,Recipient == "Barrett, Michael J." & (City == "Lexington" | City == "Sudbury" | City == ""))
+S1inc = nrow(Barrettinc)
 ```
 
 ```{r}
@@ -76,11 +88,14 @@ Boncore_under1000 = subset(BoncoreAll, Amount <= 1000)
 
 Boncore_under1000_individual = subset(Boncore_under1000, Record.Type.Description == "Individual")
 
-Boncoredistrict_under1000 = subset(Boncore_under1000_individual, (City == "Boston" | City == "Revere" | City == "Winthrop" | City == "Cambridge"))
+Boncoredistrict_under1000 = subset(Boncore_under1000_individual, (num == "1" | City == "Revere" | City == "Winthrop"))
 
 S2a = sum(Boncoredistrict_under1000$Amount)/sum(Boncore_under1000_individual$Amount)
 S2b= sum(Boncoredistrict_under1000$Amount)/sum(BoncoreAll$Amount)
 S2c=sum(Boncoredistrict_under1000$Amount)/sum(Boncore_under1000$Amount)
+
+Boncoreinc = subset(badaddress,Recipient == "Boncore, Joseph Angelo" & (City == "Boston" | City == "Cambridge" | City == ""))
+S2inc = nrow(Boncoreinc)
 ```
 
 ```{r}
@@ -91,11 +106,14 @@ Brady_under1000 = subset(BradyAll, Amount <= 1000)
 
 Brady_under1000_individual = subset(Brady_under1000, Record.Type.Description == "Individual")
 
-Bradydistrict_under1000 = subset(Brady_under1000_individual, (City == "Brockton" | City == "East Bridgewater" | City == "Halifax" | City == "Hanover" | City == "Hampton" | City == "Plympton" | City == "Whitman" | City == "Easton"))
+Bradydistrict_under1000 = subset(Brady_under1000_individual, (num == "34" | City == "Brockton" | City == "Halifax" | City == "Hanover" | City == "Hampton" | City == "Plympton" | City == "Whitman" ))
 
 S3a = sum(Bradydistrict_under1000$Amount)/sum(Brady_under1000_individual$Amount)
 S3b= sum(Bradydistrict_under1000$Amount)/sum(BradyAll$Amount)
 S3c=sum(Bradydistrict_under1000$Amount)/sum(Brady_under1000$Amount)
+
+Bradyinc = subset(badaddress,Recipient == "Brady, Michael D." & (City == "Easton" | City == "East Bridgewater" |  City == ""))
+S3inc = nrow(Bradyinc)
 ```
 
 ```{r}
@@ -106,26 +124,32 @@ Chandler_under1000 = subset(ChandlerAll, Amount <= 1000)
 
 Chandler_under1000_individual = subset(Chandler_under1000, Record.Type.Description == "Individual")
 
-Chandlerdistrict_under1000 = subset(Chandler_under1000_individual, (City == "Boylston" | City == "Clinton" | City == "Holden" | City == "Northborough" | City == "Princeton" | City == "West Boylston" | City == "Worcester"))
+Chandlerdistrict_under1000 = subset(Chandler_under1000_individual, (num == "7" | City == "Boylston" | City == "Holden" | City == "Princeton" | City == "West Boylston" ))
 
 S4a = sum(Chandlerdistrict_under1000$Amount)/sum(Chandler_under1000_individual$Amount)
 S4b= sum(Chandlerdistrict_under1000$Amount)/sum(ChandlerAll$Amount)
 S4c=sum(Chandlerdistrict_under1000$Amount)/sum(Chandler_under1000$Amount)
+
+Chandlerinc = subset(badaddress,Recipient == "Chandler, Harriette L." & (City == "CLINTON" | City == "NORTHBOROUGH" |  City=="NORTHBORO" | City == "WORCESTER" | City == ""))
+S4inc = nrow(Chandlerinc)
 ```
 
 ```{r}
-#Subsetting Harriette Finegold
+#Subsetting Barry Finegold
 FinegoldAll = subset(senate, Recipient == "Finegold, Barry R." )
 
 Finegold_under1000 = subset(FinegoldAll, Amount <= 1000)
 
 Finegold_under1000_individual = subset(Finegold_under1000, Record.Type.Description == "Individual")
 
-Finegolddistrict_under1000 = subset(Finegold_under1000_individual, (City == "Lawrence" | City == "Andover" | City == "Tewksbury" | City == "Dracut"))
+Finegolddistrict_under1000 = subset(Finegold_under1000_individual, (num == "14" | City == "Lawrence" | City == "Andover" | City == "Tewksbury" | City == "Dracut"))
 
 S10a = sum(Finegolddistrict_under1000$Amount)/sum(Finegold_under1000_individual$Amount)
 S10b= sum(Finegolddistrict_under1000$Amount)/sum(FinegoldAll$Amount)
 S10c=sum(Finegolddistrict_under1000$Amount)/sum(Finegold_under1000$Amount)
+
+Finegoldinc = subset(badaddress,Recipient == "Finegold, Barry R."  & (City == ""))
+S10inc = nrow(Finegoldinc)
 ```
 
 ```{r}
@@ -136,11 +160,14 @@ Comerford_under1000 = subset(ComerfordAll, Amount <= 1000)
 
 Comerford_under1000_individual = subset(Comerford_under1000, Record.Type.Description == "Individual")
 
-Comerforddistrict_under1000 = subset(Comerford_under1000_individual, (City == "Northampton" | City == "Amherst" | City == "Hadley" | City == "Hatfield" | City == "Pelham" | City == "South Hadley" | City == "Bernardston" | City == "Colrain" | City == "Deerfield" | City == "Erving" | City == "Gill" | City == "Greenfield" | City== "Leverett" | City == "Leyden" | City=="Montague" | City == "New Salem" | City == "Northfield" | City == "Orange" | City == "Shutesbury" | City == "Warwick" | City == "Sunderland" | City == "Wendell" | City == "Whately" | City == "Royalston"))
+Comerforddistrict_under1000 = subset(Comerford_under1000_individual, (num == "38" | City == "Northampton" | City == "Amherst" | City == "Hadley" | City == "Hatfield" | City == "Pelham" | City == "South Hadley" | City == "Bernardston" | City == "Colrain" | City == "Deerfield" | City == "Erving" | City == "Gill" | City == "Greenfield" | City== "Leverett" | City == "Leyden" | City=="Montague" | City == "New Salem" | City == "Northfield" | City == "Orange" | City == "Shutesbury" | City == "Warwick" | City == "Sunderland" | City == "Wendell" | City == "Whately" | City == "Royalston"))
 
 S5a = sum(Comerforddistrict_under1000$Amount)/sum(Comerford_under1000_individual$Amount)
 S5b= sum(Comerforddistrict_under1000$Amount)/sum(ComerfordAll$Amount)
 S5c=sum(Comerforddistrict_under1000$Amount)/sum(Comerford_under1000$Amount)
+
+Comerfordinc = subset(badaddress,Recipient == "Comerford, Joanne" & (City == ""))
+S5inc = nrow(Comerfordinc)
 ```
 
 ```{r}
@@ -151,11 +178,14 @@ Cyr_under1000 = subset(CyrAll, Amount <= 1000)
 
 Cyr_under1000_individual = subset(Cyr_under1000, Record.Type.Description == "Individual")
 
-Cyrdistrict_under1000 = subset(Cyr_under1000_individual, (City == "Barnstable" | City == "Brewster" | City == "Chatham" | City == "Dennis" | City == "Eastham" | City == "Harwich" | City == "Mashpee" | City == "Orleans" | City == "Provincetown" | City == "Truro" | City == "Wellfleet" | City == "Yarmouth" | City== "Aquinnah" | City == "Chilmark" | City=="Edgartown" | City == "Gosnold" | City == "Oak Bluffs" | City == "Tissbury" | City == "West Tisbury" | City == "Nantucket"))
+Cyrdistrict_under1000 = subset(Cyr_under1000_individual, (num == "26" | City == "Barnstable" | City == "Brewster" | City == "Chatham" | City == "Dennis" | City == "Eastham" | City == "Harwich" | City == "Mashpee" | City == "Orleans" | City == "Provincetown" | City == "Truro" | City == "Wellfleet" | City == "Yarmouth" | City== "Aquinnah" | City == "Chilmark" | City=="Edgartown" | City == "Gosnold" | City == "Oak Bluffs" | City == "Tissbury" | City == "West Tisbury" | City == "Nantucket"))
 
 S6a = sum(Cyrdistrict_under1000$Amount)/sum(Cyr_under1000_individual$Amount)
 S6b= sum(Cyrdistrict_under1000$Amount)/sum(CyrAll$Amount)
 S6c=sum(Cyrdistrict_under1000$Amount)/sum(Cyr_under1000$Amount)
+
+Cyrinc = subset(badaddress,Recipient == "Cyr, Julian Andre" & (City == ""))
+S6inc = nrow(Cyrinc)
 ```
 
 ```{r}
@@ -166,11 +196,14 @@ Eldridge_under1000 = subset(EldridgeAll, Amount <= 1000)
 
 Eldridge_under1000_individual = subset(Eldridge_under1000, Record.Type.Description == "Individual")
 
-Eldridgedistrict_under1000 = subset(Eldridge_under1000_individual, (City == "Marlborough" | City == "Acton" | City == "Ayer" | City == "Boxborough" | City == "Hudson" | City == "Littleton" | City == "Maynard" | City == "Shirley" | City == "Stow" | City == "Sudbury" | City == "Harvard" | City == "Northborough" | City== "Southborough" | City == "Westborough"))
+Eldridgedistrict_under1000 = subset(Eldridge_under1000_individual, (num == "11" | City == "Marlborough" | City == "Acton" | City == "Ayer" | City == "Boxborough" | City == "Hudson" | City == "Littleton" | City == "Maynard" | City == "Shirley" | City == "Stow" | City == "Harvard" | City== "Southborough" | City == "Westborough"))
 
 S7a = sum(Eldridgedistrict_under1000$Amount)/sum(Eldridge_under1000_individual$Amount)
 S7b= sum(Eldridgedistrict_under1000$Amount)/sum(EldridgeAll$Amount)
 S7c=sum(Eldridgedistrict_under1000$Amount)/sum(Eldridge_under1000$Amount)
+
+Eldridgeinc = subset(badaddress,Recipient == "Eldridge, James" & (City == "Sudbury" | City == "Northborough" |City == "Northboro" | City == "Southboro" | City == "Westboro" | City == ""))
+S7inc = nrow(Eldridgeinc)
 ```
 
 ```{r}
@@ -181,11 +214,14 @@ Fattman_under1000 = subset(FattmanAll, Amount <= 1000)
 
 Fattman_under1000_individual = subset(Fattman_under1000, Record.Type.Description == "Individual")
 
-Fattmandistrict_under1000 = subset(Fattman_under1000_individual, (City == "Blackston" | City == "Douglas" | City == "Dudley" | City == "Hopedale" | City == "Mendon" | City == "Milford" | City == "Millville" | City == "Northbridge" | City == "Oxford" | City == "Southbridge" | City == "Sutton" | City == "Uxbridge" | City== "Webster" | City == "Bellingham"))
+Fattmandistrict_under1000 = subset(Fattman_under1000_individual, (num == "9" | City == "Blackston" | City == "Douglas" | City == "Dudley" | City == "Hopedale" | City == "Mendon" | City == "Milford" | City == "Millville"| City == "Oxford" | City == "Southbridge" | City == "Sutton" | City == "Uxbridge" | City== "Webster" | City == "Bellingham"))
 
 S8a = sum(Fattmandistrict_under1000$Amount)/sum(Fattman_under1000_individual$Amount)
 S8b= sum(Fattmandistrict_under1000$Amount)/sum(FattmanAll$Amount)
 S8c=sum(Fattmandistrict_under1000$Amount)/sum(Fattman_under1000$Amount)
+
+Fattmaninc = subset(badaddress,Recipient == "Fattman, Ryan" & (City == "Northbridge" | City == ""))
+S8inc = nrow(Fattmaninc)
 ```
 
 ```{r}
@@ -196,10 +232,326 @@ Gobi_under1000 = subset(GobiAll, Amount <= 1000)
 
 Gobi_under1000_individual = subset(Gobi_under1000, Record.Type.Description == "Individual")
 
-Gobidistrict_under1000 = subset(Gobi_under1000_individual, (City == "Ashburnham" | City == "Athol" | City == "Barre" | City == "Brookfield" | City == "Charlton" | City == "East Brookfield" | City == "Hardwick" | City == "Hubbardston" | City == "New Braintree" | City == "North Brookfield" | City == "Oakham" | City == "Paxton" | City== "Petersham" | City == "Phillipston" | City == "Rutland" | City == "Spencer" | City == "Sturbridge" | City == "Templeton" | City == "Warren" | City == "West Brookfield" | City == "Winchendon" | City == "Brimfield" | City == "Holland" | City== "Monson" | City == "Palmer" | City == "Wales" | City == "Ware" | City== "Ashby"))
+Gobidistrict_under1000 = subset(Gobi_under1000_individual, (num == "24" | City == "Ashburnham" | City == "Athol" | City == "Barre" | City == "Brookfield" | City == "Charlton" | City == "East Brookfield" | City == "Hardwick" | City == "Hubbardston" | City == "New Braintree" | City == "North Brookfield" | City == "Oakham" | City == "Paxton" | City== "Petersham" | City == "Phillipston" | City == "Rutland" | City == "Spencer" | City == "Sturbridge" | City == "Templeton" | City == "Warren" | City == "West Brookfield" | City == "Winchendon" | City == "Brimfield" | City == "Holland" | City== "Monson" | City == "Palmer" | City == "Wales" | City == "Ware" | City== "Ashby"))
 
 S11a = sum(Gobidistrict_under1000$Amount)/sum(Gobi_under1000_individual$Amount)
 S11b= sum(Gobidistrict_under1000$Amount)/sum(GobiAll$Amount)
 S11c=sum(Gobidistrict_under1000$Amount)/sum(Gobi_under1000$Amount)
+
+Gobiinc = subset(badaddress,Recipient == "Gobi, Anne M." & (City == ""))
+S11inc = nrow(Gobiinc)
+```
+
+```{r}
+#Subsetting Adam Hinds
+HindsAll = subset(senate, Recipient == "Hinds, Adam Gray" )
+
+Hinds_under1000 = subset(HindsAll, Amount <= 1000)
+
+Hinds_under1000_individual = subset(Hinds_under1000, Record.Type.Description == "Individual")
+
+Hindsdistrict_under1000 = subset(Hinds_under1000_individual, (num == "37" | City == "Adams" | City == "Berkshire" | City == "Alford" | City == "Ashfield" | City == "Becket" | City == "Buckland" | City == "Blandford"| City == "Buckland" | City == "Charlemont" | City == "Cheshire" | City == "Chester" | City== "Chesterfield" | City == "Clarksburg" | City == "Conway" | City == "Cummington" | City == "Dalton" | City == "Egremont" | City == "Florida" | City == "Goshen" | City == "Great Barrington"| City == "Hancock" | City == "Hawley" | City == "Heath" | City == "Hinsdale" | City== "Huntington" | City == "Lanesborough" | City == "Lee" | City == "Lenox" | City == "Middlefield" | City == "Monroe" | City == "Monterey" | City == "Mount Washington" | City == "New Ashford"| City == "New Marlborough" | City == "Otis" | City == "Peru" | City == "Plainfield" | City== "Richmond" | City == "Rowe" | City == "Sandisfield" | City == "Savoy" | City == "Sheffield" | City == "Shelburne" | City == "Stockbridge" | City == "Tyringham" | City == "Washington"| City == "West Stockbridge" | City == "Westhampton" | City == "Williamsburg" | City == "Williamstown" | City== "Windsor" | City == "Worthington" | City == "North Adams"))
+
+S12a = sum(Hindsdistrict_under1000$Amount)/sum(Hinds_under1000_individual$Amount)
+S12b= sum(Hindsdistrict_under1000$Amount)/sum(HindsAll$Amount)
+S12c=sum(Hindsdistrict_under1000$Amount)/sum(Hinds_under1000$Amount)
+
+Hindsinc = subset(badaddress,Recipient == "Hinds, Adam Gray" & (City == ""))
+S12inc = nrow(Hindsinc)
+```
+
+```{r}
+#Subsetting John Keenan
+KeenanAll = subset(senate, Recipient == "Keenan, John F." )
+
+Keenan_under1000 = subset(KeenanAll, Amount <= 1000)
+
+Keenan_under1000_individual = subset(Keenan_under1000, Record.Type.Description == "Individual")
+
+Keenandistrict_under1000 = subset(Keenan_under1000_individual, (num == "2" | City == "Quincy" | City == "Holbrook" | City == "Abington" | City == "Rockland"))
+
+S13a = sum(Keenandistrict_under1000$Amount)/sum(Keenan_under1000_individual$Amount)
+S13b= sum(Keenandistrict_under1000$Amount)/sum(KeenanAll$Amount)
+S13c=sum(Keenandistrict_under1000$Amount)/sum(Keenan_under1000$Amount)
+
+Keenaninc = subset(badaddress,Recipient == "Keenan, John F." & (City == "Braintree" | City == ""))
+S13inc = nrow(Keenaninc)
+```
+
+```{r}
+#Subsetting Edward Kennedy
+KennedyAll = subset(senate, Recipient == "Kennedy, Edward" )
+
+Kennedy_under1000 = subset(KennedyAll, Amount <= 1000)
+
+Kennedy_under1000_individual = subset(Kennedy_under1000, Record.Type.Description == "Individual")
+
+Kennedydistrict_under1000 = subset(Kennedy_under1000_individual, (num == "10" | City == "Lowell" | City == "Dunstable" | City == "Groton" | City == "Pepperell" | City == "Tyngsborough" | City == "Westford" | City == "Tyngsboro"))
+
+S14a = sum(Kennedydistrict_under1000$Amount)/sum(Kennedy_under1000_individual$Amount)
+S14b= sum(Kennedydistrict_under1000$Amount)/sum(KennedyAll$Amount)
+S14c=sum(Kennedydistrict_under1000$Amount)/sum(Kennedy_under1000$Amount)
+
+Kennedyinc = subset(badaddress,Recipient == "Kennedy, Edward" & (City == ""))
+S14inc = nrow(Kennedyinc)
+```
+
+```{r}
+#Subsetting Eric Lesser
+LesserAll = subset(senate, Recipient == "Lesser, Eric Phillip" )
+
+Lesser_under1000 = subset(LesserAll, Amount <= 1000)
+
+Lesser_under1000_individual = subset(Lesser_under1000, Record.Type.Description == "Individual")
+
+Lesserdistrict_under1000 = subset(Lesser_under1000_individual, (num == "39" | City == "East Longmeadow" | City == "Hampden" | City == "Longmeadow" | City == "Ludlow" | City == "Wilbraham" | City == "Belchertown" | City == "Granby"))
+
+S15a = sum(Lesserdistrict_under1000$Amount)/sum(Lesser_under1000_individual$Amount)
+S15b= sum(Lesserdistrict_under1000$Amount)/sum(LesserAll$Amount)
+S15c=sum(Lesserdistrict_under1000$Amount)/sum(Lesser_under1000$Amount)
+
+Lesserinc = subset(badaddress,Recipient == "Lesser, Eric Phillip" & (City == "Chicopee" | City == "Springfield" | City == ""))
+S15inc = nrow(Lesserinc)
+```
+
+```{r}
+#Subsetting Jason Lewis
+LewisAll = subset(senate, Recipient == "Lewis, Jason" )
+
+Lewis_under1000 = subset(LewisAll, Amount <= 1000)
+
+Lewis_under1000_individual = subset(Lewis_under1000, Record.Type.Description == "Individual")
+
+Lewisdistrict_under1000 = subset(Lewis_under1000_individual, (num == "17" | City == "Malden" | City == "Melrose" | City == "Reading" | City == "Stoneham" | City == "Wakefield" ))
+
+S16a = sum(Lewisdistrict_under1000$Amount)/sum(Lewis_under1000_individual$Amount)
+S16b= sum(Lewisdistrict_under1000$Amount)/sum(LewisAll$Amount)
+S16c=sum(Lewisdistrict_under1000$Amount)/sum(Lewis_under1000$Amount)
+
+Lewisinc = subset(badaddress,Recipient == "Lewis, Jason" & (City == "Winchester" | City == ""))
+S16inc = nrow(Lewisinc)
+```
+
+```{r}
+#Subsetting Joan Lovely
+LovelyAll = subset(senate, Recipient == "Lovely, Joan" )
+
+Lovely_under1000 = subset(LovelyAll, Amount <= 1000)
+
+Lovely_under1000_individual = subset(Lovely_under1000, Record.Type.Description == "Individual")
+
+Lovelydistrict_under1000 = subset(Lovely_under1000_individual, (num == "16" | City == "Beverly" | City == "Peabody" | City == "Salem" | City == "Danvers" | City == "Topsfield"))
+
+S17a = sum(Lovelydistrict_under1000$Amount)/sum(Lovely_under1000_individual$Amount)
+S17b= sum(Lovelydistrict_under1000$Amount)/sum(LovelyAll$Amount)
+S17c=sum(Lovelydistrict_under1000$Amount)/sum(Lovely_under1000$Amount)
+
+Lovelyinc = subset(badaddress,Recipient == "Lovely, Joan" & (City == ""))
+S17inc = nrow(Lovelyinc)
+```
+
+```{r}
+#Subsetting Michael Moore
+MooreAll = subset(senate, Recipient == "Moore, Michael" )
+
+Moore_under1000 = subset(MooreAll, Amount <= 1000)
+
+Moore_under1000_individual = subset(Moore_under1000, Record.Type.Description == "Individual")
+
+Mooredistrict_under1000 = subset(Moore_under1000_individual, (num == "8" | City == "Auburn" | City == "Grafton" | City == "Leicester" | City == "Shrewsbury" | City == "Upton"))
+
+S18a = sum(Mooredistrict_under1000$Amount)/sum(Moore_under1000_individual$Amount)
+S18b= sum(Mooredistrict_under1000$Amount)/sum(MooreAll$Amount)
+S18c=sum(Mooredistrict_under1000$Amount)/sum(Moore_under1000$Amount)
+
+Mooreinc = subset(badaddress,Recipient == "Moore, Michael" & (City == "Northbridge" | City == "Worcester" | City == ""))
+S18inc = nrow(Mooreinc)
+```
+
+```{r}
+#Subsetting Patrick O'Connor
+OconnorAll = subset(senate, Recipient == "O'Connor, Patrick Michael" )
+
+Oconnor_under1000 = subset(OconnorAll, Amount <= 1000)
+
+Oconnor_under1000_individual = subset(Oconnor_under1000, Record.Type.Description == "Individual")
+
+Oconnordistrict_under1000 = subset(Oconnor_under1000_individual, (num == "33" | City == "Duxbury" | City == "Hingham" | City == "Hull" | City == "Marshfield" | City == "Norwell" | City == "Scituate" | City == "Cohasset" | City == "Weymouth"))
+
+S19a = sum(Oconnordistrict_under1000$Amount)/sum(Oconnor_under1000_individual$Amount)
+S19b= sum(Oconnordistrict_under1000$Amount)/sum(OconnorAll$Amount)
+S19c=sum(Oconnordistrict_under1000$Amount)/sum(Oconnor_under1000$Amount)
+
+Oconnorinc = subset(badaddress,Recipient == "O'Connor, Patrick Michael" & (City == ""))
+S19inc = nrow(Oconnorinc)
+```
+
+```{r}
+#Subsetting Marc Pacheco
+PachecoAll = subset(senate, Recipient == "Pacheco, Marc R." )
+
+Pacheco_under1000 = subset(PachecoAll, Amount <= 1000)
+
+Pacheco_under1000_individual = subset(Pacheco_under1000, Record.Type.Description == "Individual")
+
+Pachecodistrict_under1000 = subset(Pacheco_under1000_individual, (num == "21" | City == "Bridgewater" | City == "Carver" | City == "Marion" | City == "Middleborough" | City == "Middleboro" | City == "Wareham" | City == "Berkley" | City == "Raynham" | City == "Taunton"))
+
+S20a = sum(Pachecodistrict_under1000$Amount)/sum(Pacheco_under1000_individual$Amount)
+S20b= sum(Pachecodistrict_under1000$Amount)/sum(PachecoAll$Amount)
+S20c=sum(Pachecodistrict_under1000$Amount)/sum(Pacheco_under1000$Amount)
+
+Pachecoinc = subset(badaddress,Recipient == "Pacheco, Marc R." & (City == ""))
+S20inc = nrow(Pachecoinc)
+```
+
+```{r}
+#Subsetting Becca Rausch
+RauschAll = subset(senate, Recipient == "Rausch, Rebecca Lynne" )
+
+Rausch_under1000 = subset(RauschAll, Amount <= 1000)
+
+Rausch_under1000_individual = subset(Rausch_under1000, Record.Type.Description == "Individual")
+
+Rauschdistrict_under1000 = subset(Rausch_under1000_individual, (num == "13" | City == "Millis" | City == "Norfolk" | City == "Plainville" | City == "Wrentham" | City == "North Attleboro" | City == "North Attleborough" | City == "Sherborn" | City == "Wayland" ))
+
+S21a = sum(Rauschdistrict_under1000$Amount)/sum(Rausch_under1000_individual$Amount)
+S21b= sum(Rauschdistrict_under1000$Amount)/sum(RauschAll$Amount)
+S21c=sum(Rauschdistrict_under1000$Amount)/sum(Rausch_under1000$Amount)
+
+Rauschinc = subset(badaddress,Recipient == "Rausch, Rebecca Lynne" & (City == "Franklin" | City == "Needham"| City == "Wellesley" | City == "Attleboro" | City == "Natick" | City == ""))
+S21inc = nrow(Rauschinc)
+```
+
+```{r}
+#Subsetting Michael Rodrigues
+RodriguesAll = subset(senate, Recipient == "Rodrigues, Michael J." )
+
+Rodrigues_under1000 = subset(RodriguesAll, Amount <= 1000)
+
+Rodrigues_under1000_individual = subset(Rodrigues_under1000, Record.Type.Description == "Individual")
+
+Rodriguesdistrict_under1000 = subset(Rodrigues_under1000_individual, (num == "35" | City == "Fall River" | City == "Freemont" | City == "Somerset" | City == "Swansea" | City == "Westport" | City == "Lakeville" | City == "Rochester" ))
+
+S22a = sum(Rodriguesdistrict_under1000$Amount)/sum(Rodrigues_under1000_individual$Amount)
+S22b= sum(Rodriguesdistrict_under1000$Amount)/sum(RodriguesAll$Amount)
+S22c=sum(Rodriguesdistrict_under1000$Amount)/sum(Rodrigues_under1000$Amount)
+
+Rodriguesinc = subset(badaddress,Recipient == "Rodrigues, Michael J." & (City == ""))
+S22inc = nrow(Rodriguesinc)
+```
+
+```{r}
+#Subsetting Michael Rush
+RushAll = subset(senate, Recipient == "Rush, Michael F." )
+
+Rush_under1000 = subset(RushAll, Amount <= 1000)
+
+Rush_under1000_individual = subset(Rush_under1000, Record.Type.Description == "Individual")
+
+Rushdistrict_under1000 = subset(Rush_under1000_individual, (num == "31" | City == "Dover" | City == "Dedham" | City == "Needham" | City == "Norwood" | City == "Westwood" ))
+
+S23a = sum(Rushdistrict_under1000$Amount)/sum(Rush_under1000_individual$Amount)
+S23b= sum(Rushdistrict_under1000$Amount)/sum(RushAll$Amount)
+S23c=sum(Rushdistrict_under1000$Amount)/sum(Rush_under1000$Amount)
+
+Rushinc = subset(badaddress,Recipient == "Rush, Michael F." & (City == "Boston" | City == ""))
+S23inc = nrow(Rushinc)
+```
+
+```{r}
+#Subsetting Karen Spilka
+SpilkaAll = subset(senate, Recipient == "Spilka, Karen" )
+
+Spilka_under1000 = subset(SpilkaAll, Amount <= 1000)
+
+Spilka_under1000_individual = subset(Spilka_under1000, Record.Type.Description == "Individual")
+
+Spilkadistrict_under1000 = subset(Spilka_under1000_individual, (num == "12" | City == "Ashland" | City == "Framingham" | City == "Holliston" | City == "Hopkinton" | City == "Medway" ))
+
+S24a = sum(Spilkadistrict_under1000$Amount)/sum(Spilka_under1000_individual$Amount)
+S24b= sum(Spilkadistrict_under1000$Amount)/sum(SpilkaAll$Amount)
+S24c=sum(Spilkadistrict_under1000$Amount)/sum(Spilka_under1000$Amount)
+
+Spilkainc = subset(badaddress,Recipient == "Spilka, Karen" & (City == "Natick" | City == "Franklin" | City == ""))
+S24inc = nrow(Spilkainc)
+```
+
+```{r}
+#Subsetting Walter Timilty
+TimiltyAll = subset(senate, Recipient == "Timilty, Walter F." )
+
+Timilty_under1000 = subset(TimiltyAll, Amount <= 1000)
+
+Timilty_under1000_individual = subset(Timilty_under1000, Record.Type.Description == "Individual")
+
+Timiltydistrict_under1000 = subset(Timilty_under1000_individual, (num == "20" | City == "Avon" | City == "Canton" | City == "Milton" | City == "Randolph" | City == "Stoughton" | City == "West Bridgewater" ))
+
+S25a = sum(Timiltydistrict_under1000$Amount)/sum(Timilty_under1000_individual$Amount)
+S25b= sum(Timiltydistrict_under1000$Amount)/sum(TimiltyAll$Amount)
+S25c=sum(Timiltydistrict_under1000$Amount)/sum(Timilty_under1000$Amount)
+
+Timiltyinc = subset(badaddress,Recipient == "Timilty, Walter F." & (City == "Braintree" | City == "Sharon" | City == "Easton" | City == "East Bridgewater" | City == ""))
+S25inc = nrow(Timiltyinc)
+```
+
+```{r}
+#Subsetting Dean Tran
+TranAll = subset(senate, Recipient == "Tran, Dean A." )
+
+Tran_under1000 = subset(TranAll, Amount <= 1000)
+
+Tran_under1000_individual = subset(Tran_under1000, Record.Type.Description == "Individual")
+
+Trandistrict_under1000 = subset(Tran_under1000_individual, (num == "0" | City == "Fitchburh" | City == "Gardner" | City == "Leominster" | City == "Berlin" | City == "Bolton" | City == "Lancaster" | City == "Lunenburg" | City == "Sterling" | City == "Westminster" | City == "Townsend" ))
+
+S26a = sum(Trandistrict_under1000$Amount)/sum(Tran_under1000_individual$Amount)
+S26b= sum(Trandistrict_under1000$Amount)/sum(TranAll$Amount)
+S26c=sum(Trandistrict_under1000$Amount)/sum(Tran_under1000$Amount)
+
+Traninc = subset(badaddress,Recipient == "Tran, Dean A." & (City == "Clinton" | City == ""))
+S26inc = nrow(Traninc)
+```
+
+```{r}
+#Subsetting James Welch
+WelchAll = subset(senate, Recipient == "Welch, James T." )
+
+Welch_under1000 = subset(WelchAll, Amount <= 1000)
+
+Welch_under1000_individual = subset(Welch_under1000, Record.Type.Description == "Individual")
+
+Welchdistrict_under1000 = subset(Welch_under1000_individual, (num == "19" | City == "West Springfield"))
+
+S27a = sum(Welchdistrict_under1000$Amount)/sum(Welch_under1000_individual$Amount)
+S27b= sum(Welchdistrict_under1000$Amount)/sum(WelchAll$Amount)
+S27c=sum(Welchdistrict_under1000$Amount)/sum(Welch_under1000$Amount)
+
+Welchinc = subset(badaddress,Recipient == "Welch, James T." & (City == "Chicopee" | City == "Springfield" | City == ""))
+S27inc = nrow(Welchinc)
+```
+
+```{r}
+#Creating Table of Out-of-District Donations by Senator
+prop.1 = c(S1a,S2a,S3a,S4a,S5a,S6a,S7a,S8a,S9a,S10a,S11a,S12a,S13a,S14a,S15a,S16a,S17a,S18a,S19a,S20a,S21a,S22a,S23a,S24a,S25a,S26a,S27a)
+reps$prop.1 = prop.1
+
+prop.2 = c(S1b,S2b,S3b,S4b,S5b,S6b,S7b,S8b,S9b,S10b,S11b,S12b,S13b,S14b,S15b,S16b,S17b,S18b,S19b,S20b,S21b,S22b,S23b,S24b,S25b,S26b,S27b)
+reps$prop.2 = prop.2
+
+prop.3 = c(S1c,S2c,S3c,S4c,S5c,S6c,S7c,S8c,S9c,S10c,S11c,S12c,S13c,S14c,S15c,S16c,S17c,S18c,S19c,S20c,S21c,S22c,S23c,S24c,S25c,S26c,S27c)
+reps$prop.3 = prop.3
+
+unknown = c(S1inc,S2inc,S3inc,S4inc,S5inc,S6inc,S7inc,S8inc,S9inc,S10inc,S11inc,S12inc,S13inc,S14inc,S15inc,S16inc,S17inc,S18inc,S19inc,S20inc,S21inc,S22inc,S23inc,S24inc,S25inc,S26inc,S27inc)
+reps$unknown = unknown
+
+write.csv(reps, "/cloud/project/senatordf.csv")
+```
+
+```{r}
+model1 = lm(reps$prop.1 ~ reps$Bills)
+model2=lm(reps$prop.2 ~ reps$Hometown)
+summary(model2)
+model3=lm(reps$prop.2 ~ reps$Hometown)
+
 ```
 
