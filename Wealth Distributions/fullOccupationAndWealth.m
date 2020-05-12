@@ -3,6 +3,7 @@
 %% Gathering Occupation Groupings
 
 load("feeneyWithHomes.mat")
+load("donations.mat")
 
 donorData = donations;
 
@@ -41,12 +42,72 @@ end
 
 for i=1:length(wordsByFrequency)
     jobIndex = find(contains(lower(string(usJobs)),wordsByFrequency(i)) & donorData.RecordTypeDescription=="Individual");
-    data{i,4} = donorData.Amount(jobIndex);
+    data{i,4} = donorData(jobIndex,:);
 end
-%% 
 
-plot(sort(data{1,4}),'r*')
-hold on
-plot(sort(data{2,4}),'b*')
-plot(sort(data{3,4}),'g*')
-plot(sort(data{4,4}),'p*')
+%% Percent demographic donations testing for each job
+job = "homemaker"
+
+pWhite = white(data,job)
+pMale = male(data,job)
+pDem = dem(data,job)
+pInDistrict = inD(data,job)
+
+%% Finding inDistricts for all jobs in table format
+idp = [];
+pw = [];
+pm = [];
+pd = [];
+dof = [];
+job = [];
+for i=1:100
+    job = [job; data{i,1}];
+    idp = [idp; inD(data,data{i,1})];
+    pw = [pw; white(data,data{i,1})];
+    pm = [pm; male(data,data{i,1})];
+    pd = [pd; dem(data,data{i,1})];
+    dof = [dof; height(data{i,4})];
+end
+
+jobIdp = table(job, idp, pw, pm, pd, dof);
+
+function [pInDistrict] = inD(data,job)
+    for i=1:length(data)
+        if data{i,1} == job
+            index = i;
+        end
+    end
+    subData = data{index,4};
+    pInDistrict = nanmean(subData.inDistrict);
+end
+
+function [pDem] = dem(data,job)
+    for i=1:length(data)
+        if data{i,1} == job
+            index = i;
+        end
+    end
+    subData = data{index,4};
+    pDem = length(find(subData.Party == "Democrat"))/height(subData);
+end
+
+function [pMale] = male(data,job)
+    for i=1:length(data)
+        if data{i,1} == job
+            index = i;
+        end
+    end
+    subData = data{index,4};
+    pMale = length(find(subData.Sex=="Male"))/height(subData);
+end
+
+function [pWhite] = white(data,job)
+    for i=1:length(data)
+        if data{i,1} == job
+            index = i;
+        end
+    end
+    subData = data{index,4};
+    pWhite = length(find(subData.Race=="White"))/height(subData);
+end
+

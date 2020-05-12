@@ -41,9 +41,25 @@ end
 
 for i=1:length(wordsByFrequency)
     jobIndex = find(contains(lower(string(usJobs)),wordsByFrequency(i)) & donorData.RecordTypeDescription=="Individual");
-    data{i,4} = donorData.Amount(jobIndex);
+    data{i,4} = donorData(jobIndex,:);
 end
+%% 
 
 plot(sort(data{1,4}),'r*')
 hold on
 plot(sort(data{2,4}),'b*')
+plot(sort(data{3,4}),'g*')
+plot(sort(data{4,4}),'p*')
+
+%% Percent White donations
+
+function [pWhite] = dem(data,job)
+    for i=1:length(wordsByFrequency)
+        if {i,1} == job
+            index = i;
+        end
+    end
+    subData = {i,4};
+        
+end
+
