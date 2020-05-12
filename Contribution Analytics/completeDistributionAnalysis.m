@@ -75,8 +75,9 @@ townsP{27} = ["Chicopee","Springfield"];
 data = cell(length(reps),3);
 
 %Looping through each representative
-for rep = 1:length(reps)
-    
+
+%for rep = 1:length(reps)
+    rep = 1
     %Preallocating arrays
     amount = [];
     inDistrict = [];
@@ -197,4 +198,4 @@ for rep = 1:length(reps)
 %     legend("Out of District","In District","No Data")
 %     hold off
 
-end
+%end
