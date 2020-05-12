@@ -4,7 +4,7 @@
 
 load("feeneyWithHomes.mat")
 
-donorData = FeeneyWithHomes;
+donorData = donations;
 
 jobs = [];
 for i=1:height(donorData)
@@ -14,18 +14,13 @@ end
 usJobs = jobs;
 lengthListed = length(donorData.Amount(usJobs~="" & donorData.RecordTypeDescription == "Individual"));
 
-empty = ismissing(jobs);
+empty = ismissing(jobs) | jobs == "";
 
 jobs(empty) = [];
 
 jobs = strip(string(jobs));
 
-keywords = [];
-for i = 1:length(jobs)
-   keywords = [keywords;split(jobs(i))];
-end
-
-keywords = lower(keywords);
+keywords = lower(jobs);
 [words,~,idx] = unique(keywords);
 numOccurrences = histcounts(idx,numel(words));
 
@@ -50,12 +45,11 @@ for i=1:height(data)
 end
 sums = rankOfOccurrences.*means;
 totalProportion = sums/sum(donorData.Amount);
-impactRatio = totalProportion./wordProportion;
 
 data = [data, table(means,stds,sums,totalProportion)];
 
 %% Grouping for those with at least [threshold] values (arbitrary)
-threshold = 5
+threshold = 20;
 
 commonIndices = find(data.rankOfOccurrences>=threshold);
 
@@ -69,28 +63,28 @@ bar(meanDonorData);
 %xticklabels(orderedJobs(end-10:end));
 
 %% For Feeney,only. Matching with home estimates
-allMeans = [];
-
-for j=1:length(find(data.rankOfOccurrences>threshold))
-    
-targetJob = data(j,:).wordsByFrequency;
-homeMeans = [];
-for i=1:height(FeeneyWithHomes)
-    if contains(lower(string(FeeneyWithHomes(i,:).Occupation)),targetJob)
-        if FeeneyWithHomes(i,:).zestimate ~= 0 & FeeneyWithHomes(i,:).RecordTypeDescription == "Individual"
-            homeMeans = [homeMeans, FeeneyWithHomes(i,:).zestimate];
-        end
-    end
-end
-allMeans = [allMeans; mean(homeMeans)];
-end
-%% 
-
-[sortedMeans, homeSortIdx] = sort(allMeans,'descend');
-jobsByHomePrice = data(1:j,:).wordsByFrequency(homeSortIdx);
-
-homeTables = table(sortedMeans,jobsByHomePrice);
-bar(sortedMeans)
-hold on
-xticklabels(jobsByHomePrice)
-
+% allMeans = [];
+% 
+% for j=1:length(find(data.rankOfOccurrences>threshold))
+%     
+% targetJob = data(j,:).wordsByFrequency;
+% homeMeans = [];
+% for i=1:height(FeeneyWithHomes)
+%     if contains(lower(string(FeeneyWithHomes(i,:).Occupation)),targetJob)
+%         if FeeneyWithHomes(i,:).zestimate ~= 0 & FeeneyWithHomes(i,:).RecordTypeDescription == "Individual"
+%             homeMeans = [homeMeans, FeeneyWithHomes(i,:).zestimate];
+%         end
+%     end
+% end
+% allMeans = [allMeans; mean(homeMeans)];
+% end
+% %% 
+% 
+% [sortedMeans, homeSortIdx] = sort(allMeans,'descend');
+% jobsByHomePrice = data(1:j,:).wordsByFrequency(homeSortIdx);
+% 
+% homeTables = table(sortedMeans,jobsByHomePrice);
+% bar(sortedMeans)
+% hold on
+% xticklabels(jobsByHomePrice)
+% 
