@@ -37,6 +37,9 @@ Representative Effectiveness Rates
 - occupationsAndWealth.m: Running frequency analysis on donor's listed occupation
 - AverageDonationsByProfession.twb: Tableau Workbook showing relation between donations and jobs
 
+- fullOccupationAndWealth.m: Drawing relationships from Job titles
+- jobIdp.xlsx: Table of Job Title, In District Donation percentage, and other demographic stats
+
 ## Contributors
 Matthew Katz - Boston College - katzmn@bc.edu
 
