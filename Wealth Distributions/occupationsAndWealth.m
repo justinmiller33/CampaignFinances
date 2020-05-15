@@ -5,7 +5,7 @@
 load("feeneyWithHomes.mat")
 
 %Option to load subset of donor data (Just Feeney's District)
-donorData = donations;
+donorData = FeeneyWithHomes;
 
 %Making string array of everybody's jobs
 jobs = [];
