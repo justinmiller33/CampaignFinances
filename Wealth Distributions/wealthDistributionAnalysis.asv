@@ -65,6 +65,6 @@ belowIndices = find(inDataNZ.zestimate<CP);
 aboveAmounts = inDataNZ.Amount(aboveIndices);
 belowAmounts = inDataNZ.Amount(belowIndices);
 
-%Ratio of cumulative donations from above CP to below CP
-ratio = sum(aboveAmounts)/sum(belowAmounts);
+%Ratio of donations from above CP to below CP
+ratio = sum(aboveAmounts)/sum(belowAmounts)
 
