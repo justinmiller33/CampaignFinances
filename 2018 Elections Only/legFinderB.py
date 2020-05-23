@@ -248,7 +248,7 @@ for i in range(len(names)):
 print("loaded")
 
 #Loop through csv of people
-for i in range(len(toTest)):
+for i in range(len(names)):
     t=time.time()
     #Adding time to comply with api 1 request per second rule
     time.sleep(0.75)
