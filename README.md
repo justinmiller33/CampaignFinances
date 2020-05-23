@@ -18,6 +18,8 @@ Representative Effectiveness Rates
 
 - Data On Senate Districts.xlsx: Demographic Data on each of the above districts.
 
+- senate2018.xlsx: All 2018 political donations to senators, regardless of race competition.
+
 ### Code and Created Files:
 **1. District Locating: Testing ratios of In District and Out of District Donations using Shapefile Data**
 - legFinder.py: Address Extraction and Normalization, Geolocation, District Identification from SENATE2012_POLY.shp
@@ -39,6 +41,12 @@ Representative Effectiveness Rates
 
 - fullOccupationAndWealth.m: Drawing relationships from Job titles
 - jobIdp.xlsx: Table of Job Title, In District Donation percentage, and other demographic stats
+
+**5. 2018 Elections Only: Normalizing Occupation Distributions by using only 2018 Data**
+- LegFinderB.py: Modified legFinder.py with similar functionality for 2018 dataset
+- orderedDistrictsB.csv: output from LegFinderB.py
+- OccupationSenateData.png: table of average donations by job category
+
 
 ## Contributors
 Matthew Katz - Boston College - katzmn@bc.edu
