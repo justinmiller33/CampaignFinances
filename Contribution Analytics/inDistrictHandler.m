@@ -3,8 +3,9 @@
 
 load('senators.mat');
 load('donations.mat');
-load('demographics.mat');
+load("C:\devel\CampaignFinances\2018 Elections Only\2018Donations.mat");
 
+donations = senate2018;
 %List of Reps
 reps = ["Feeney, Paul","Barrett, Michael J.","Boncore, Joseph Angelo","Brady, Michael D.","Chandler, Harriette L.","Finegold, Barry R.","Comerford, Joanne","Cyr, Julian Andre","Eldridge, James","Fattman, Ryan","Gobi, Anne M.","Hinds, Adam Gray","Keenan, John F.","Kennedy, Edward","Lesser, Eric Phillip","Lewis, Jason","Lovely, Joan","Moore, Michael","O'Connor, Patrick Michael","Pacheco, Marc R.","Rausch, Rebecca Lynne","Rodrigues, Michael J.","Rush, Michael F.","Spilka, Karen","Timilty, Walter F.","Tran, Dean A.","Welch, James T."];
 
@@ -80,16 +81,16 @@ for i=1:height(donations)
     index = find(reps == string(donations.Recipient(i)));
     city = lower(string(donations(i,:).City));
     
-    if distNums(index) == donations.VarName24(i)
+    if distNums(index) == donations.District(i)
         inDistrict = [inDistrict, 1];
         
     elseif contains(city, lower(townsC{index}))
         inDistrict = [inDistrict, 1];
         
-    elseif contains(city, lower(townsP{index})) & donations.VarName24(i) > 40
+    elseif contains(city, lower(townsP{index})) & donations.Disctrict(i) > 40
         inDistrict = [inDistrict, NaN];
         
-    elseif donations.VarName24 < 40
+    elseif donations.District < 40
         inDistrict = [inDistrict, 0];
         
     elseif ismissing(city) | city == "" | city == "<missing>"

@@ -211,8 +211,7 @@ names = names.to_numpy()
 #Converting zipcodes to 5-digit strings (2048-->"02048")
 #Needed for geolocating
 #For test two, we are updating those with 9-digit zip codes and only running them
-#Array for the ones we missed in test one
-toTest = np.array([])
+
 for i in range(len(names)):
 
     #Making all zipcodes strings
@@ -220,8 +219,6 @@ for i in range(len(names)):
 
     #Cutting it down to the first 5 digits with a zero at the start(MA)
     if len(names[i][6]) > 5:
-        
-        toTest = np.append(toTest, [i])
         
         if (names[i][6][0] != "0"):
             names[i][6] = names[i][6][0:4]
@@ -231,8 +228,7 @@ for i in range(len(names)):
     if len(names[i][6])!=5:
         names[i][6] = "0"+names[i][6]
 
-#Modifying toTest array to runable integers
-toTest = toTest.astype(int)
+
 
 #Deleting PO Boxes and Apt numbers which invalidate geolocation
 for i in range(len(names)):
@@ -256,15 +252,15 @@ for i in range(len(names)):
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses
     try:
-        lat,long = coordLookup(names[toTest[i]][3],names[toTest[i]][4],names[toTest[i]][5],names[toTest[i]][6])
+        lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
         #Check for out of state only if address is valid
-        if names[toTest[i]][5]!="MA":
-            outOfState = np.append(outOfState, [toTest[i]])
+        if names[i][5]!="MA":
+            outOfState = np.append(outOfState, [i])
             continue
 
     except:
         #If geolocation fails, adress is invalid
-        badAddress = np.append(badAddress,[toTest[i]])
+        badAddress = np.append(badAddress,[i])
         #print("bad address")
         continue
 
@@ -281,7 +277,7 @@ for i in range(len(names)):
         #print(np.argmax(district))
     #If not, assume that the polygon location test diverged/failed
     else:
-        diverged=np.append(diverged,[toTest[i]])
+        diverged=np.append(diverged,[i])
         #print("diverged")
     #print(time.time()-t)
     if i%1000 == 0:
