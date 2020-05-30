@@ -15,9 +15,5 @@ distNums = [32,6,1,34,7,14,38,26,11,9,24,37,2,10,39,17,16,8,33,21,13,35,31,12,20
 %Initialize matrix for each donor
 donorDistrict = zeros(height(donations));
 
-%For each rep
-for i = 1:length(rep)
-    senate2018.District(find(reps(i)==donations.Recipient(i))) == distNums(i)
-end
 
 end
