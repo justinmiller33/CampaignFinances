@@ -1,5 +1,5 @@
 #Automating district location based off of individual's addresses
-#FOR 2018 ELECTIONS... data collection cycle 2
+#FOR ANY ELECTION DATASET ~V3~
 
 #Each district is stored as a polygon with thousands of edges
 #We can extract the points that make up the polygon
@@ -13,8 +13,6 @@ import matplotlib.pyplot as plt
 import pyproj
 from geopy.geocoders import Nominatim
 import time
-
-t = time.time()
 
 #Loop to extract [x,y] file of all points for one senate district
 def shpLoop(j):
@@ -240,14 +238,18 @@ for i in range(len(names)):
         continue
 
 #----------------------------------------------------------------------
-#Indicating start of heavy loop
+#Indicating start of heavy loop, timing EVERYTHING
 print("loaded")
+start = time.time()
 
 #Loop through csv of people
 for i in range(len(names)):
-    t=time.time()
-    #Adding time to comply with api 1 request per second rule
-    time.sleep(0.75)
+    
+    #Progress updates (estimated time remaining)
+    if i%100 == 1:
+        print(str(((time.time()-start)/i * (len(names)-i))/3600)+" Hours Remaining")
+
+    time.sleep(.8)
 
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses
@@ -278,11 +280,9 @@ for i in range(len(names)):
     #If not, assume that the polygon location test diverged/failed
     else:
         diverged=np.append(diverged,[i])
-        #print("diverged")
-    #print(time.time()-t)
-    if i%1000 == 0:
-        print(i)
-        print(time.time()-t)
+
+    
+     
     
 #Analyzing test        
 print(reps)
