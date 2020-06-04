@@ -2,7 +2,7 @@ import shapefile
 import numpy as np
 import matplotlib.pyplot as plt
 
-sf = shapefile.Reader("/Users/justi/OneDrive/Documents/datasets/OCPF Data/senate2012/SENATE2012_POLY.shp")
+sf = shapefile.Reader("C:\devel\CampaignFinances\Locater\senate2012\SENATE2012_POLY.shp")
 
 for j in range(40):
     feature = sf.shapeRecords()[j]

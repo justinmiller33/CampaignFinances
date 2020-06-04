@@ -203,10 +203,10 @@ def naiveClassifier(town):
 #----------------------------------------------------------------------
 
 #Reading Data from .shp file
-sf = shapefile.Reader("senate2012/HOUSE2012_POLY.shp")
+sf = shapefile.Reader("house2012/HOUSE2012_POLY.shp")
 
 #INPUT NUMBER OF DISTRICTS IN SENATE/HOUSE FILE
-numDistricts = 40
+numDistricts = 160
 
 #Finding the amount of vertices for each district
 length = int(lengthFinder(numDistricts))
@@ -221,7 +221,7 @@ outOfState = np.array([])
 
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
-names = pd.read_excel("senate2018.xlsx")
+names = pd.read_excel("housejobs.xlsx")
 names = names.to_numpy()
 
 #Converting zipcodes to 5-digit strings (2048-->"02048")
@@ -264,8 +264,10 @@ start = time.time()
 for i in range(len(names)):
     
     #Progress updates (estimated time remaining)
-    if i%100 == 50:
+    if i%100 == 20:
         print(str(((time.time()-start)/i * (len(names)-i))/3600)+" Hours Remaining")
+        print(reps)
+        print(badAddress)
         np.save('reps',reps)
         np.save('outOfState',outOfState)
         np.save('diverged',diverged)
