@@ -21,11 +21,11 @@ with open('results.csv','w') as csvfile:
     #Loop through each row, checking failures and then assigning reps to rest
     for i in range(rows):
         if i in outOfState:
-            writer.writerow({"district":"41"})
+            writer.writerow({"district":"161"})
         elif i in diverged:
-            writer.writerow({"district":"42"})
+            writer.writerow({"district":"162"})
         elif i in badAddress:
-            writer.writerow({"district":"41"})
+            writer.writerow({"district":"163"})
         else:
             writer.writerow({"district":str(reps[repLoc])})
             repLoc = repLoc + 1
