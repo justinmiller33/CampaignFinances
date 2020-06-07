@@ -219,6 +219,15 @@ diverged = np.array([])
 badAddress = np.array([])
 outOfState = np.array([])
 
+"""
+#NOTE:
+#If continuing from another test you have to load reps, outOfState, diverged, and badAddress
+reps = np.load('reps.npy')
+outOfState = np.load('outOfState.npy')
+diverged = np.load('diverged.npy')
+badAddress = np.load('badAddress.npy')
+"""
+
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
 names = pd.read_excel("housejobsfull.xlsx")
