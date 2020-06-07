@@ -11,13 +11,13 @@ from collections import Counter
 from scipy import stats
 
 #Extract Data
-data = pd.read_excel("housejobs.xlsx")
+data = pd.read_excel("housejobsfull.xlsx")
 data = data.to_numpy()
 
 #Dict of total number of donations and list of reps
 repCount = Counter(data[:,12])
 reps = list(repCount.keys())
-
+"""
 #Preallocating list for each reps maximum district by # of donors who live their
 dists = np.array([])
 
@@ -35,4 +35,5 @@ for i in range(len(reps)):
 
     distMode = stats.mode(tempDist).mode[0]
     dists = np.append(dists,[distMode]) 
-        
+
+"""
