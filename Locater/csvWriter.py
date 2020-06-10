@@ -1,13 +1,21 @@
 #Csv writer for results from legFinderGlobal.py
 import numpy as np
+import pandas as pd
 import csv
 
-#Load data
+#Task 1: writing reps to csv
+
+
+#Load data needed for everything
 reps = np.load('reps.npy')
 outOfState = np.load('outOfState.npy')
 diverged = np.load('diverged.npy')
 badAddress = np.load('badAddress.npy')
 
+#Load overall data
+data = pd.read_excel("housejobsfull.xlsx")
+data = data.to_numpy()
+"""
 #Starting location for reps
 repLoc = 0
 
@@ -30,3 +38,30 @@ with open('results.csv','w') as csvfile:
             writer.writerow({"district":str(reps[repLoc])})
             repLoc = repLoc + 1
             
+"""
+
+#Task 2: writing estimated districts to csv
+
+repNames = np.load('repNames.npy')
+dists = np.load('dists.npy')
+counts = np.load('counts.npy')
+
+#Open and give md for csv file
+with open('repDistrict.csv','w') as csvfile:
+    fieldnames = ["repDistrict","donorCount"]
+    writer = csv.DictWriter(csvfile,fieldnames=fieldnames)
+    writer.writeheader()
+    rows = len(reps)+len(outOfState)+len(diverged)+len(badAddress)
+
+    #Loop through each row, checking failures and then assigning reps to rest
+    #Finding the repnum (np.where is broke lmao)
+    for i in range(rows):
+        for j in range(len(repNames)):
+            if repNames[j] == data[i][12]:
+                repNum = j
+
+        #Writing rep district and their total donor count
+        writer.writerow({"repDistrict":str(int(dists[repNum])),"donorCount":str(int(counts[repNum]))})
+
+
+     

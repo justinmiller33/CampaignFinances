@@ -17,9 +17,10 @@ data = data.to_numpy()
 #Dict of total number of donations and list of reps
 repCount = Counter(data[:,12])
 reps = list(repCount.keys())
-"""
+
 #Preallocating list for each reps maximum district by # of donors who live their
 dists = np.array([])
+counts = np.array([])
 
 #Looping through each rep
 for i in range(len(reps)):
@@ -33,7 +34,12 @@ for i in range(len(reps)):
             if data[j,12] == reps[i]:
                 tempDist = np.append(tempDist,[data[j,20]])
 
+    #tempCount = count of donors for that recipient
+    tempCount = repCount[reps[i]]
     distMode = stats.mode(tempDist).mode[0]
-    dists = np.append(dists,[distMode]) 
+    dists = np.append(dists,[distMode])
+    counts = np.append(counts,[tempCount])
 
-"""
+np.save('repNames',reps)
+np.save('dists',dists)
+np.save('counts',counts)
