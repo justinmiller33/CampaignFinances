@@ -13,9 +13,13 @@ diverged = np.load('diverged.npy')
 badAddress = np.load('badAddress.npy')
 
 #Load overall data
-data = pd.read_excel("housejobsfull.xlsx")
+data = pd.read_excel("masshousefullformatted.xlsx")
 data = data.to_numpy()
+
+
+
 """
+#Block off above this line for part 2
 #Starting location for reps
 repLoc = 0
 
@@ -39,8 +43,11 @@ with open('results.csv','w') as csvfile:
             repLoc = repLoc + 1
             
 """
-
+#Block off above this line for part 1
 #Task 2: writing estimated districts to csv
+
+#RL IS LOCATION OF REPNAME COLUMN IN SPREADSHEET
+rl = 0
 
 repNames = np.load('repNames.npy')
 dists = np.load('dists.npy')
@@ -57,11 +64,11 @@ with open('repDistrict.csv','w') as csvfile:
     #Finding the repnum (np.where is broke lmao)
     for i in range(rows):
         for j in range(len(repNames)):
-            if repNames[j] == data[i][12]:
+            if repNames[j] == data[i][rl]:
                 repNum = j
 
         #Writing rep district and their total donor count
         writer.writerow({"repDistrict":str(int(dists[repNum])),"donorCount":str(int(counts[repNum]))})
 
 
-     
+   

@@ -11,16 +11,23 @@ from collections import Counter
 from scipy import stats
 
 #Extract Data
-data = pd.read_excel("housejobsfull.xlsx")
+data = pd.read_excel("masshousefullformatted.xlsx")
 data = data.to_numpy()
 
+#BELOW CHANGES EVERY RUN
+#rl is the excel column that has the rep names in it
+rl = 0
+#dl is the excel column that has district num in it
+dl = 14
+
 #Dict of total number of donations and list of reps
-repCount = Counter(data[:,12])
+repCount = Counter(data[:,rl])
 reps = list(repCount.keys())
 
 #Preallocating list for each reps maximum district by # of donors who live their
 dists = np.array([])
 counts = np.array([])
+
 
 #Looping through each rep
 for i in range(len(reps)):
@@ -29,17 +36,25 @@ for i in range(len(reps)):
     #Looping through each row of master datafile
     for j in range(len(data)):
         #If a district was found
-        if data[j,20] < 160:
+        if data[j,dl] < 160:
             #If the recepient is our current rep
-            if data[j,12] == reps[i]:
-                tempDist = np.append(tempDist,[data[j,20]])
+            if data[j,rl] == reps[i]:
+                tempDist = np.append(tempDist,[data[j,dl]])
 
     #tempCount = count of donors for that recipient
+    
     tempCount = repCount[reps[i]]
-    distMode = stats.mode(tempDist).mode[0]
+    #If all donors were out of district
+    try:
+        distMode = stats.mode(tempDist).mode[0]
+    except:
+        distMode = 164
+        
     dists = np.append(dists,[distMode])
     counts = np.append(counts,[tempCount])
-
+            
+"""
 np.save('repNames',reps)
 np.save('dists',dists)
 np.save('counts',counts)
+"""

@@ -230,7 +230,7 @@ badAddress = np.load('badAddress.npy')
 
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
-names = pd.read_excel("housejobsfull.xlsx")
+names = pd.read_excel("masshousefullformatted.xlsx")
 names = names.to_numpy()
 
 #Converting zipcodes to 5-digit strings (2048-->"02048")
