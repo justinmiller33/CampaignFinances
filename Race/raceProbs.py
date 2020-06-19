@@ -41,7 +41,8 @@ start = time.time()
 surnames = getName(names,nl,len(names))
 print("Surnames calculated in "+str(time.time()-start))
 print(str(len(surnames))+" surnames gathered from "+str(len(names))+" donors")
-
+np.save('surnames',surnames)
+print('saved')
 
 def getProps(name):
 
@@ -60,7 +61,7 @@ loopStart = time.time()
 for i in range(len(surnames.keys())):
     #Saving and updating every 100 names
     if i%100 == 99:
-        np.save('raceProps',props)
+        np.save('raceProps2',props)
         print(str((time.time()-loopStart)/i)+" seconds per loop")
         print(str(((len(surnames.keys())-i)*(time.time()-loopStart)/i)/60)+" minutes remaining")
     
@@ -77,8 +78,3 @@ for i in range(len(surnames.keys())):
 
     except:
          continue
-
-    print(props)
-    time.sleep(3)
-
-
