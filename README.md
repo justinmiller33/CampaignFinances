@@ -1,5 +1,5 @@
 # CampaignFinances
-Ongoing research on the campaign fundraising in Massachusetts State Elections.
+Ongoing research on the inequalities present in campaign fundraising for Massachusetts State Elections.
 
 ## Topics of Focus
 People's Pledges
