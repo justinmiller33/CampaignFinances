@@ -41,8 +41,7 @@ start = time.time()
 surnames = getName(names,nl,len(names))
 print("Surnames calculated in "+str(time.time()-start))
 print(str(len(surnames))+" surnames gathered from "+str(len(names))+" donors")
-np.save('surnames',surnames)
-print('saved')
+
 
 def getProps(name):
 
@@ -78,3 +77,21 @@ for i in range(len(surnames.keys())):
 
     except:
          continue
+
+
+def normalize(names,nl,surnames):
+    realProps = np.zeros((len(names),6))
+    for i in range(len(surnames)):
+        spots = surnames[list(surnames.keys())[i]]
+        for j in range(len(spots)):
+            realProps[spots[j]] == props[i]
+
+    if i%1000 = 100:
+        print(i)
+
+    return realProps
+        
+    
+    
+    
+    
