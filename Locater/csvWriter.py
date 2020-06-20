@@ -13,7 +13,7 @@ diverged = np.load('diverged.npy')
 badAddress = np.load('badAddress.npy')
 
 #Load overall data
-data = pd.read_excel("masshousefullformatted.xlsx")
+data = pd.read_excel("masssenatefullformatted.xlsx")
 data = data.to_numpy()
 
 

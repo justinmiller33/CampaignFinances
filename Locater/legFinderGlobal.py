@@ -203,10 +203,10 @@ def naiveClassifier(town):
 #----------------------------------------------------------------------
 
 #Reading Data from .shp file
-sf = shapefile.Reader("house2012/HOUSE2012_POLY.shp")
+sf = shapefile.Reader("senate2012/SENATE2012_POLY.shp")
 
 #INPUT NUMBER OF DISTRICTS IN SENATE/HOUSE FILE
-numDistricts = 160
+numDistricts = 40
 
 #Finding the amount of vertices for each district
 length = int(lengthFinder(numDistricts))
@@ -230,7 +230,7 @@ badAddress = np.load('badAddress.npy')
 
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
-names = pd.read_excel("masshousefullformatted.xlsx")
+names = pd.read_excel("masssenatefullformatted.xlsx")
 names = names.to_numpy()
 
 #Converting zipcodes to 5-digit strings (2048-->"02048")
@@ -290,7 +290,17 @@ for i in range(len(names)):
         reps = np.append(reps,[naiveClassifier(names[i][4])])
     if naiveClassifier(names[i][4])==0:
         reps = np.append(reps,[0])
-    """        
+    """
+
+    #Checking for missing zipcodes
+    if names[i][6] == '0nan':
+        if names[i][5]!="MA":
+            outOfState = np.append(outOfState, [i])
+            continue
+        else:
+            badAddress = np.append(badAddress, [i])
+            continue
+            
         
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses

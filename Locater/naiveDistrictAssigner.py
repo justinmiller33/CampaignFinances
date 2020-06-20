@@ -11,7 +11,7 @@ from collections import Counter
 from scipy import stats
 
 #Extract Data
-data = pd.read_excel("masshousefullformatted.xlsx")
+data = pd.read_excel("masssenatefullformatted.xlsx")
 data = data.to_numpy()
 
 #BELOW CHANGES EVERY RUN
@@ -53,8 +53,8 @@ for i in range(len(reps)):
     dists = np.append(dists,[distMode])
     counts = np.append(counts,[tempCount])
             
-"""
+
 np.save('repNames',reps)
 np.save('dists',dists)
 np.save('counts',counts)
-"""
+
