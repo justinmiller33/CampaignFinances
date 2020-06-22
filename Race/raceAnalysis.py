@@ -4,7 +4,7 @@ import pandas as pd
 
 #Loading race proportion and overall data
 props = np.load('realProps.npy')
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\masshousefullformatted.xlsx")
+names = pd.read_excel("C:\devel\CampaignFinances\Locater\mass_house_full_update.xlsx")
 
 #Adusting blank lines at end of names
 names = names[0:len(props)]

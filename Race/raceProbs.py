@@ -8,7 +8,7 @@ import time
 
 #Loading in names
 start = time.time()
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\masshousefullformatted.xlsx")
+names = pd.read_excel("C:\devel\CampaignFinances\Locater\masssenatefullformatted.xlsx")
 names = names.to_numpy()
 print("TIME TO LOAD: "+str(time.time()-start))
 
@@ -60,7 +60,7 @@ loopStart = time.time()
 for i in range(len(surnames.keys())):
     #Saving and updating every 100 names
     if i%100 == 99:
-        np.save('raceProps2',props)
+        np.save('racePropsSenate',props)
         print(str((time.time()-loopStart)/i)+" seconds per loop")
         print(str(((len(surnames.keys())-i)*(time.time()-loopStart)/i)/60)+" minutes remaining")
     
@@ -79,19 +79,20 @@ for i in range(len(surnames.keys())):
          continue
 
 
-def normalize(names,nl,surnames):
+def normalize(names,nl,surnames,props):
     realProps = np.zeros((len(names),6))
     for i in range(len(surnames)):
         spots = surnames[list(surnames.keys())[i]]
         for j in range(len(spots)):
-            realProps[spots[j]] == props[i]
+            realProps[spots[j]] = props[i]
 
-    if i%1000 = 100:
-        print(i)
+        if i%1000 == 100:
+            print(i)
 
     return realProps
         
     
     
-    
+realProps = normalize(names,nl,surnames,props)
+np.save('realPropsSenate',realProps)
     
