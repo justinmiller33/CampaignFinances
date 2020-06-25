@@ -6,7 +6,7 @@ import time
 
 #Loading data to numpy array
 dataPath = "C:/devel/CampaignFinances/Locater/"
-fileName = "mass_senate_full.xlsx"
+fileName = "mass_house_full_update.xlsx"
 names = pd.read_excel(dataPath+fileName)
 names = names.to_numpy()
 print('Loaded ' + str(len(names)) +' donations')
