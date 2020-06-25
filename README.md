@@ -60,6 +60,10 @@ Homophily Among Donors
 - raceWriter.py: Writing race proportions to races.csv
 - raceAnalysis: Using CLT to estimate donor trends by race... E.g. Average Amount, Out of District Influence, etc...
 
+**8. Wealth Test**
+- randomValuationTest.py: Taking 1000 random samples from dataset and finding home zestimate
+- randomValuationAnalysis.py: Exploring relationships between home price, amount, and district status
+
 ## Tools and Attributions
 
 **- Python**
