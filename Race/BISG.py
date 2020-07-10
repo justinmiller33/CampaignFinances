@@ -20,7 +20,7 @@ us = np.array([usPop * 0.601, 0.601, usPop * 0.134, 0.134, usPop * 0.059, 0.059,
 
 # Load straight surname proportions by loading the completed xlsx (house or senate)
 pathToLocater = 'C:/devel/CampaignFinances/Locater/'
-data = pd.read_excel(pathToLocater + "masshousefullformatted.xlsx")
+data = pd.read_excel(pathToLocater + "masssenatefullformatted.xlsx")
 
 # Getting general surname probs (Just for the 4 Detectables this time)
 whiteGen = data.White

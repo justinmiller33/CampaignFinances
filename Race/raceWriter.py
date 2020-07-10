@@ -4,9 +4,9 @@ import pandas as pd
 import csv
 
 #Writing props to csv
-
+"""
 #Load data needed for everything
-props = np.load('realProps.npy')
+props = np.load('realPropsSenate.npy')
 
 
 
@@ -22,3 +22,18 @@ with open('races.csv','w') as csvfile:
         
         writer.writerow({"Asian":str(props[location,0]),"Black":str(props[location,1]),"Native":str(props[location,2]),"White":str(props[location,3]),"2+":str(props[location,4]),"Hispanic":str(props[location,5])})
             
+"""
+
+# Writing BISG props to csv
+file = 'houseOutput.npy'
+output = np.load(file)
+
+with open('output.csv','w') as csvfile:
+    fieldnames = ["White","Black","Asian","Hispanic"]
+    writer = csv.DictWriter(csvfile,fieldnames=fieldnames)
+    writer.writeheader()
+    rows = len(output)
+
+    for i in range(rows):
+        writer.writerow({"White":str(output[i,0]),"Black":str(output[i,1]),"Asian":str(output[i,2]),"Hispanic":str(output[i,3])})
+
