@@ -75,6 +75,7 @@ Homophily Among Donors
 **9. Multiple Donors**
 - candSummary.py: Exploring relationships between district demographic data and donation trends.
 - bipartateGraph.py: Creating network of candidates connected by shared donors for Senate and House campaigns.
+
 ![networkGif](https://github.com/justinmiller33/justinmiller33.github.io/blob/master/network.gif)
 
 ## Tools and Attributions
