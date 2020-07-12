@@ -22,6 +22,8 @@ Homophily Among Donors
 
 - mass_house_full_update.xlsx/mass_senate_full.xlsx: All **house contendees** and **senate contendees** donations on 2016/18 Cycle.
 
+- houseCandidatesUpdated.xlsx: Metadata on the campaign status and demographics of a candidate and their district for the 2016/2018 Cycle.
+
 ### Code and Created Files:
 **1. District Locating: Testing ratios of In District and Out of District Donations using Shapefile Data**
 - legFinder.py: Address Extraction and Normalization, Geolocation, District Identification from SENATE2012_POLY.shp
@@ -69,6 +71,11 @@ Homophily Among Donors
 - randomValuationTest.py: Taking 1000 random samples from dataset and finding home zestimate
 - randomValuationAnalysis.py: Exploring relationships between home price, amount, and district status
 ![wealthDist](https://github.com/justinmiller33/CampaignFinances/blob/master/Wealth%20Test/donorHomePrice.png)
+
+**9. Multiple Donors**
+- candSummary.py: Exploring relationships between district demographic data and donation trends.
+- bipartateGraph.py: Creating network of candidates connected by shared donors for Senate and House campaigns.
+![networkGif](https://github.com/justinmiller33/justinmiller33.github.io/blob/master/network.gif)
 
 ## Tools and Attributions
 
