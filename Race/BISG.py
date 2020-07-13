@@ -20,7 +20,7 @@ us = np.array([usPop * 0.601, 0.601, usPop * 0.134, 0.134, usPop * 0.059, 0.059,
 
 # Load straight surname proportions by loading the completed xlsx (house or senate)
 pathToLocater = 'C:/devel/CampaignFinances/Locater/'
-data = pd.read_excel(pathToLocater + "masssenatefullformatted.xlsx")
+data = pd.read_excel(pathToLocater + "masshousefullformatted.xlsx")
 
 # Getting general surname probs (Just for the 4 Detectables this time)
 whiteGen = data.White
@@ -39,6 +39,7 @@ maRaceProps = np.array([mass[0] / us[0], mass[4] / us[4], mass[2] / us[2], mass[
 
 # Defaulting cityRaces to maRaceProps
 cityRaces = maRaceProps
+defaulted = 0
 
 # Output array of BISG probabilities
 output = np.zeros((len(data),4))
@@ -59,6 +60,7 @@ def bayes(subject):
     global cityRaces
 
     global output
+    global defaulted
 
     oldProps = np.array([data.White[subject], data.Asian[subject], data.Black[subject], data.Hispanic[subject]])
 
@@ -70,7 +72,9 @@ def bayes(subject):
     if data.State[subject] != 'MA':
         # Save subjects output
         output[subject] = np.array([data.White[subject], data.Asian[subject], data.Black[subject], data.Hispanic[subject]])
-
+        # Adjust since surname props are out of 100, not 1.
+        output[subject] = output[subject]/100
+        
     else:
     # Find the index of city
     # If not in spreadsheet, then keep MA stats as your output (better than nothing)
@@ -84,6 +88,7 @@ def bayes(subject):
         # Use MA demographics
         except:
             cityRaces = maRaceProps
+            defaulted = defaulted + 1
 
         # For each race: in order white, asian, black, hispanic
         for i in range(4):
@@ -102,3 +107,4 @@ for subject in range(len(data)):
     if subject%1000 == 500:
         print(subject/len(data))
                 
+print(defaulted)

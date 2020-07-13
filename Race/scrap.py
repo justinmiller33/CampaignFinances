@@ -1,19 +1,18 @@
 #Race Analysis
-# *** UPDATED FOR BISG VALUES ***
 import numpy as np
 import pandas as pd
 
 #Loading race proportion and overall data
-output = np.load('outputHouse.npy')
+props = np.load('realProps.npy')
 names = pd.read_excel("C:\devel\CampaignFinances\Locater\mass_house_full_update.xlsx")
 
 #Adusting blank lines at end of names
-names = names[0:len(output)]
+names = names[0:len(props)]
 data = names.to_numpy()
 
 print('loaded')
 #To help understancing... heres array of races for the props
-races = ["White","Black","Asian","Hispanic"]
+races = ["Asian","Black","Native","White","MultiRacial","Hispanic"]
 
 """
 In district vs. out of District by race
@@ -31,14 +30,14 @@ for i in range(len(data)):
         
         
 #Racial distribution of inD:
-inSums = np.zeros((len(inD),4))
+inSums = np.zeros((len(inD),6))
 for i in range(len(inD)):
-    inSums[i] = output[int(inD[i])] 
+    inSums[i] = props[int(inD[i])] 
     
 #Racial distribution of outD:
-outSums = np.zeros((len(outD),4))
+outSums = np.zeros((len(outD),6))
 for i in range(len(outD)):
-    outSums[i] = output[int(outD[i])]
+    outSums[i] = props[int(outD[i])]
 
 #Finding inD proportions and outD proportions:
 inR = sum(inSums)/len(inSums)
@@ -52,23 +51,23 @@ outR = outR * 100/sum(outR)
 pChange = (outR-inR)/inR
 
 """Average donation amount by races"""
-indMounts = np.zeros((len(inD),4))
+indMounts = np.zeros((len(inD),6))
 
 fails1 = 0
 for i in range(len(inD)):
     try:
-        indMounts[i] = names.Amount[int(inD[i])]*output[int(inD[i])]
+        indMounts[i] = names.Amount[int(inD[i])]*props[int(inD[i])]
     except:
         fails1 = fails1+1
         continue
 
 indsByRace = sum(indMounts)/sum(inSums)
 
-outdMounts = np.zeros((len(outD),4))
+outdMounts = np.zeros((len(outD),6))
 fails2 = 0
 for i in range(len(outD)):
     try:
-        outdMounts[i] = names.Amount[int(outD[i])]*output[int(outD[i])]
+        outdMounts[i] = names.Amount[int(outD[i])]*props[int(outD[i])]
     except:
         fails2 = fails2+1
         continue
@@ -83,6 +82,6 @@ outInRatio  = sum(outSums)/sum(inSums)
 moneyRatio = outInRatio*(outdsByRace/indsByRace)
 
 #Printing summary statistics
-out = pd.DataFrame(np.array([outInRatio,indsByRace,outdsByRace,moneyRatio]),columns = races, index = ['Out/In Donor Ratio','Average In','Average Out','Out/In Money Ratio'])
+output = pd.DataFrame(np.array([outInRatio,indsByRace,outdsByRace,moneyRatio]),columns = races, index = ['Out/In Donor Ratio','Average In','Average Out','Out/In Money Ratio'])
 pd.set_option("display.max_columns",None)
-print(out)
+print(output)
