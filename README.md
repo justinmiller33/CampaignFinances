@@ -2,13 +2,13 @@
 Ongoing research on the inequalities present in campaign fundraising for Massachusetts State Elections.
 
 ## Topics of Focus
-People's Pledges
-  
-In District vs. Out of District Donations
-  
-Wealth Distribution Among Donors
+**Disparity Caused by Out of District Donations**
 
-Homophily Among Donors
+Economic
+
+Occupational
+
+Racial
 
 ## Navigation
 ### Data Files:
@@ -23,6 +23,8 @@ Homophily Among Donors
 - mass_house_full_update.xlsx/mass_senate_full.xlsx: All **house contendees** and **senate contendees** donations on 2016/18 Cycle.
 
 - houseCandidatesUpdated.xlsx: Metadata on the campaign status and demographics of a candidate and their district for the 2016/2018 Cycle.
+
+- demographics.xlsx: Racial demographics of MA towns & large Boston neighborhoods for BISG.
 
 ### Code and Created Files:
 **1. District Locating: Testing ratios of In District and Out of District Donations using Shapefile Data**
