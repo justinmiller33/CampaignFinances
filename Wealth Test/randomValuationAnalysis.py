@@ -10,7 +10,7 @@ from scipy.stats import t
 #Getting names formatted
 #Loading data to numpy array
 dataPath = "C:/devel/CampaignFinances/Locater/"
-fileName = "mass_senate_full.xlsx"
+fileName = "mass_house_full_update.xlsx"
 names = pd.read_excel(dataPath+fileName)
 names = names.to_numpy()
 print('Loaded ' + str(len(names)) +' donations')
@@ -89,6 +89,22 @@ def plot(bins,inDistPrices,outDistPrices):
 bins = np.linspace(np.min(np.log(inDistPrices)),np.max(np.log(outDistPrices)),nb)
 plot(bins, np.log(inDistPrices),np.log(outDistPrices))
 
+# Plotting with normal outlined
+def plotWithNorm(bins,inDistPrices,outDistPrices):
+    
+    weights = np.ones(len(inDistPrices)) / len(inDistPrices)
+    plt.hist(inDistPrices, bins, weights = weights, alpha=0.5, label='In District','orange')
+
+    weights = np.ones(len(outDistPrices)) / len(outDistPrices)
+    plt.hist(outDistPrices, bins, weights = weights, alpha=0.5, label='Out of District','blue')
+
+    plt.legend(loc='upper right')
+    plt.xlabel('LN() of Home Price')
+    plt.ylabel('Count of Homes')
+    plt.title('Home Price of Donors')
+    plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
+
+    
 def ttest(inDistPrices,outDistPrices,ci):
     #normalizing with logplot
     inDistPrices = np.log(inDistPrices)
@@ -108,6 +124,28 @@ def ttest(inDistPrices,outDistPrices,ci):
 
     return outInterval
 
+# Function to put normal curve over data
+# Input already normalized arrays (np.log)
+def plotNormsExponentiated(normInDist,normOutDist):
+
+    getNormal = lambda data : np.linspace(np.mean(data) - 4*np.std(data), np.mean(data) + 4*np.std(data), 100)
+    
+    
+    plt.plot(math.e**(getNormal(normInDist)), math.e**(stats.norm.pdf(getNormal(normInDist), np.mean(normInDist), np.std(normInDist))))
+    plt.plot(math.e**(getNormal(normOutDist)), math.e**(stats.norm.pdf(getNormal(normOutDist), np.mean(normOutDist), np.std(normOutDist))))
+    
+    plt.show()
+    
+def plotNorms(normInDist,normOutDist):
+
+    getNormal = lambda data : np.linspace(np.mean(data) - 4*np.std(data), np.mean(data) + 4*np.std(data), 100)
+    
+    
+    plt.plot(getNormal(normInDist), stats.norm.pdf(getNormal(normInDist), np.mean(normInDist), np.std(normInDist))/5)
+    plt.plot(getNormal(normOutDist), stats.norm.pdf(getNormal(normOutDist), np.mean(normOutDist), np.std(normOutDist))/5)
+    
+    plt.show()
+    
 #Getting interval for out of district mean
 ci = 0.95
 outInterval = ttest(inDistPrices,outDistPrices,ci)
