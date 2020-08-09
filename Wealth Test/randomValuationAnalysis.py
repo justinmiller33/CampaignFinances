@@ -35,11 +35,11 @@ names = np.delete(names,toDelete,0)
 
 
 #Load in values from randomValuationTest.py
-homePrice = np.load('homePrice.npy')
-amounts = np.load('amounts.npy')
-inDistrict = np.load('inDistrict.npy')
-outDistrict = np.load('outDistrict.npy')
-randomDonors = np.load('randomDonors.npy')
+homePrice = np.load('homePrice2.npy')
+amounts = np.load('amounts2.npy')
+inDistrict = np.load('inDistrict2.npy')
+outDistrict = np.load('outDistrict2.npy')
+randomDonors = np.load('randomDonors2.npy')
 
 #Finding failures
 notInd = 0
@@ -89,6 +89,7 @@ def plot(bins,inDistPrices,outDistPrices):
 bins = np.linspace(np.min(np.log(inDistPrices)),np.max(np.log(outDistPrices)),nb)
 plot(bins, np.log(inDistPrices),np.log(outDistPrices))
 
+"""
 # Plotting with normal outlined
 def plotWithNorm(bins,inDistPrices,outDistPrices):
     
@@ -104,7 +105,7 @@ def plotWithNorm(bins,inDistPrices,outDistPrices):
     plt.title('Home Price of Donors')
     plt.gca().yaxis.set_major_formatter(PercentFormatter(1))
 
-    
+    """
 def ttest(inDistPrices,outDistPrices,ci):
     #normalizing with logplot
     inDistPrices = np.log(inDistPrices)
