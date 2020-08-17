@@ -203,10 +203,10 @@ def naiveClassifier(town):
 #----------------------------------------------------------------------
 
 #Reading Data from .shp file
-sf = shapefile.Reader("senate2012/SENATE2012_POLY.shp")
+sf = shapefile.Reader("house2012/HOUSE2012_POLY.shp")
 
 #INPUT NUMBER OF DISTRICTS IN SENATE/HOUSE FILE
-numDistricts = 40
+numDistricts = 160
 
 #Finding the amount of vertices for each district
 length = int(lengthFinder(numDistricts))
@@ -230,7 +230,7 @@ badAddress = np.load('badAddress.npy')
 
 #Loading CSV Data and reorganizing data structures
 #NOTE: DON'T FORGET ABOUT THE DATA PATH
-names = pd.read_excel("masssenatefullformatted.xlsx")
+names = pd.read_excel("house_full_individual.xlsx")
 names = names.to_numpy()
 
 #Converting zipcodes to 5-digit strings (2048-->"02048")
@@ -240,27 +240,27 @@ names = names.to_numpy()
 for i in range(len(names)):
 
     #Making all zipcodes strings
-    names[i][6]=str(names[i][6])
+    names[i][13]=str(names[i][13])
 
     #Cutting it down to the first 5 digits with a zero at the start(MA)
-    if len(names[i][6]) > 5:
+    if len(names[i][13]) > 5:
         
-        if (names[i][6][0] != "0"):
-            names[i][6] = names[i][6][0:4]
+        if (names[i][13][0] != "0"):
+            names[i][13] = names[i][13][0:4]
         else:
-            names[i][6] = names[i][6][0:5]
+            names[i][13] = names[i][13][0:5]
 
-    if len(names[i][6])!=5:
-        names[i][6] = "0"+names[i][6]
+    if len(names[i][13])!=5:
+        names[i][13] = "0"+names[i][13]
 
 
 
 #Deleting PO Boxes and Apt numbers which invalidate geolocation
 for i in range(len(names)):
     try:
-        temp = checkAdd(names[i][3])
+        temp = checkAdd(names[i][10])
         if type(temp) == str:
-            names[i][3] = temp
+            names[i][10] = temp
     except:
         continue
 
@@ -287,14 +287,14 @@ for i in range(len(names)):
     """
     #Checking naive classifier to see if we can tell district from town
     if naiveClassifier(names[i][4]):
-        reps = np.append(reps,[naiveClassifier(names[i][4])])
+        reps = np.append(reps,[naiveClassifier(names[i][11])])
     if naiveClassifier(names[i][4])==0:
         reps = np.append(reps,[0])
     """
 
     #Checking for missing zipcodes
-    if names[i][6] == '0nan':
-        if names[i][5]!="MA":
+    if names[i][13] == '0nan':
+        if names[i][12]!="MA":
             outOfState = np.append(outOfState, [i])
             continue
         else:
@@ -305,9 +305,9 @@ for i in range(len(names)):
     #Find coordinates from address and check to see it's in state
     #Exception handler for invalid adresses
     try:
-        lat,long = coordLookup(names[i][3],names[i][4],names[i][5],names[i][6])
+        lat,long = coordLookup(names[i][10],names[i][11],names[i][12],names[i][13])
         #Check for out of state only if address is valid
-        if names[i][5]!="MA":
+        if names[i][12]!="MA":
             outOfState = np.append(outOfState, [i])
             continue
 
