@@ -20,7 +20,7 @@ us = np.array([usPop * 0.601, 0.601, usPop * 0.134, 0.134, usPop * 0.059, 0.059,
 
 # Load straight surname proportions by loading the completed xlsx (house or senate)
 pathToLocater = 'C:/devel/CampaignFinances/Locater/'
-data = pd.read_excel(pathToLocater + "masshousefullformatted.xlsx")
+data = pd.read_excel(pathToLocater + "house_full_individual.xlsx")
 
 # Getting general surname probs (Just for the 4 Detectables this time)
 whiteGen = data.White
@@ -62,7 +62,7 @@ def bayes(subject):
     global output
     global defaulted
 
-    oldProps = np.array([data.White[subject], data.Asian[subject], data.Black[subject], data.Hispanic[subject]])
+    oldProps = np.array([data.White[subject],  data.Black[subject], data.Asian[subject], data.Hispanic[subject]])
 
     # Check for logic
     # print(oldProps)
@@ -71,7 +71,7 @@ def bayes(subject):
     # If out of mass, I'm not gonna bother to do BISG. Just keep the same probs.
     if data.State[subject] != 'MA':
         # Save subjects output
-        output[subject] = np.array([data.White[subject], data.Asian[subject], data.Black[subject], data.Hispanic[subject]])
+        output[subject] = np.array([data.White[subject], data.Black[subject], data.Asian[subject], data.Hispanic[subject]])
         # Adjust since surname props are out of 100, not 1.
         output[subject] = output[subject]/100
         
@@ -108,3 +108,6 @@ for subject in range(len(data)):
         print(subject/len(data))
                 
 print(defaulted)
+
+# Saving
+np.save('houseFinalOutputNew.npy',output)

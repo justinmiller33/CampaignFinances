@@ -8,12 +8,12 @@ import time
 
 #Loading in names
 start = time.time()
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\masssenatefullformatted.xlsx")
+names = pd.read_excel("C:\devel\CampaignFinances\Locater\house_full_individual.xlsx")
 names = names.to_numpy()
 print("TIME TO LOAD: "+str(time.time()-start))
 
 #Location of donor names in spreadsheet
-nl = 2
+nl = 9
 
 def getName(names,nl,n):
     surnames = {}
@@ -47,20 +47,20 @@ def getProps(name):
 
     #Enter key since >500 iterations
     key = '9ce90ef20cbbea81efccf3723314a41776a56fdf'
-    link = 'https://api.census.gov/data/2010/surname?get=PCTAPI,PCTBLACK,PCTAIAN,PCTWHITE,PCT2PRACE,PCTHISPANIC&NAME='+name.upper()+'&key='+key
+    link = 'https://api.census.gov/data/2010/surname?get=PCTWHITE,PCTBLACK,PCTAPI,PCTHISPANIC&NAME='+name.upper()+'&key='+key
 
     response = requests.get(link)
 
-    r = response.json()[1][0:6]
+    r = response.json()[1][0:4]
     return r
 
 
-props = np.zeros((len(surnames.keys()),6))
+props = np.zeros((len(surnames.keys()),4))
 loopStart = time.time()
 for i in range(len(surnames.keys())):
     #Saving and updating every 100 names
     if i%100 == 99:
-        np.save('racePropsSenate',props)
+        np.save('racePropsHouseNewer.npy',props)
         print(str((time.time()-loopStart)/i)+" seconds per loop")
         print(str(((len(surnames.keys())-i)*(time.time()-loopStart)/i)/60)+" minutes remaining")
     
@@ -80,7 +80,7 @@ for i in range(len(surnames.keys())):
 
 
 def normalize(names,nl,surnames,props):
-    realProps = np.zeros((len(names),6))
+    realProps = np.zeros((len(names),4))
     for i in range(len(surnames)):
         spots = surnames[list(surnames.keys())[i]]
         for j in range(len(spots)):
@@ -94,5 +94,5 @@ def normalize(names,nl,surnames,props):
     
     
 realProps = normalize(names,nl,surnames,props)
-np.save('realPropsSenate',realProps)
+np.save('realPropsHouseNew.npy',realProps)
     

@@ -6,8 +6,8 @@ from collections import Counter
 from matplotlib import pyplot as plt
 
 #Loading race proportion and overall data
-props = np.load('outputHouse.npy')
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\masshousefullformatted.xlsx")
+props = np.load('houseFinalOutput.npy')
+names = pd.read_excel("C:\devel\CampaignFinances\Locater\house_full_individual.xlsx")
 
 #Adusting blank lines at end of names
 names = names[0:len(props)]
@@ -133,12 +133,12 @@ def color_boxplot(data, color, pos=[0], ax=None):
 
 
 fig,ax = plt.subplots()
-bp1 = color_boxplot(repProps[:,0],'yellow',[1])
+bp1 = color_boxplot(repProps[:,0],'white',[1])
 bp2 = color_boxplot(repProps[:,1],'black',[2])
-#bp3 = color_boxplot(repProps[:,2],'white',[3])
-bp3 = color_boxplot(repProps[:,3],'brown',[3])
+bp3 = color_boxplot(repProps[:,2],'yellow',[3])
+bp4 = color_boxplot(repProps[:,3],'brown',[4])
 ax.autoscale()
-ax.set(xticks = [1,2,3], xticklabels = ['Asian','Black','Hispanic'])
+ax.set(xticks = [1,2,3,5], xticklabels = ['White','Black','Asian','Hispanic'])
 plt.show()
 
 
