@@ -1,0 +1,34 @@
+---
+title: "Senate Full"
+author: "Sethu Odayappan"
+date: "6/21/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+install.packages('dplyr')
+library(dplyr)
+```
+
+
+```{r}
+senate.full = read.csv("mass_senate_full.csv")
+```
+
+```{r}
+#Condense by Rep
+byrep = group_by (senate.full, Filer_Full_Name_Reverse)
+rep.info <- summarise(byrep, in.d=sum(Match, na.rm = TRUE), out.d = sum(No.Match, na.rm = TRUE), out.prop = (out.d/(out.d+in.d)))
+
+out.district = senate.full[senate.full$No.Match == "1", ]
+
+
+in.district = senate.full[senate.full$Match == "1",]
+
+#write.csv (rep.info, file = "houselist.csv")
+```
+
