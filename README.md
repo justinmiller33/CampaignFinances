@@ -31,7 +31,7 @@ Racial
 - legFinder.py: Address Extraction and Normalization, Geolocation, District Identification from SENATE2012_POLY.shp
 - orderedDistricts.csv: Output from legFinder.py 
 - legMapper.py: Insures successful shapefile conversion by visualizing target districts
-![senateMap](https://github.com/justinmiller33/CampaignFinances/blob/master/District%20Locating/senateDistrictMap.png)
+![senateMap](https://github.com/justinmiller33/CampaignFinances/blob/master/DistrictLocating/senateDistrictMap.png)
 
 **2. Overview Statistics: Visualizing Discrepancies between District Donation Ratios and Demographics**
 - SenateData_RAnalysis.Rmd: Calculating In District Vs. Out of District Contribution Proportions
@@ -48,14 +48,14 @@ Racial
 - AverageDonationsByProfession.twb: Tableau Workbook showing relation between donations and jobs
 - fullOccupationAndWealth.m: Drawing relationships from Job titles
 - jobIdp.xlsx: Table of Job Title, In District Donation percentage, and other demographic stats
-![tableau](https://github.com/justinmiller33/CampaignFinances/blob/master/Wealth%20Distributions/donationsByProffession.PNG)
+![tableau](https://github.com/justinmiller33/CampaignFinances/blob/master/WealthDistributions/donationsByProffession.PNG)
 
 **5. 2018 Elections Only: Normalizing Occupation Distributions by using only 2018 Data**
 - LegFinderB.py: Modified legFinder.py with similar functionality for 2018 dataset
 - orderedDistrictsB.csv: output from LegFinderB.py
 - OccupationSenateData.png: table of average donations by job category
 
-![jobs](https://github.com/justinmiller33/CampaignFinances/blob/master/2018%20Elections%20Only/OccupationSenateData.PNG)
+![jobs](https://github.com/justinmiller33/CampaignFinances/blob/master/2018ElectionsOnly/OccupationSenateData.PNG)
 
 **6. Locater**
 - legFinderGlobal.py: Modified from **LegFinder.py** to map districts of any state given a house or senate shapefile
@@ -72,7 +72,7 @@ Racial
 **8. Wealth Test**
 - randomValuationTest.py: Taking 1000 random samples from dataset and finding home zestimate
 - randomValuationAnalysis.py: Exploring relationships between home price, amount, and district status
-![wealthDist](https://github.com/justinmiller33/CampaignFinances/blob/master/Wealth%20Test/donorHomePrice.png)
+![wealthDist](https://github.com/justinmiller33/CampaignFinances/blob/master/WealthTest/donorHomePrice.png)
 
 **9. Multiple Donors**
 - candSummary.py: Exploring relationships between district demographic data and donation trends.
