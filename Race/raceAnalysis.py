@@ -5,7 +5,7 @@ import pandas as pd
 
 #Loading race proportion and overall data
 output = np.load('houseFinalOutput.npy')
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\house_full_individual.xlsx")
+names = pd.read_excel("C:/devel/CampaignFinances/Locater/house_full_individual.xlsx")
 
 #Adusting blank lines at end of names
 names = names[0:len(output)]
