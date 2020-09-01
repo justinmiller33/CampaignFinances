@@ -1,0 +1,291 @@
+,Filer_Full_Name_Reverse,in.d,out.d,out.prop,Democrat,Winner?,Competition?,Sex,20th_Percentile_HH_Income,Median_HH_Income,80th_Percentile_HH_Income
+1,"Adrien, Gerly",26,99,0.792,Democrat,Loser,Yes,M,22800,52500,99000
+2,"Albright-Hanna, Kate W.",20,80,0.8,Democrat,Loser,Yes,F,26500,65000,119100
+3,"Arciero, Jim",125,356,0.74012474,Democrat,Winner,Yes,M,55700,122400,201000
+4,"Arena, John W.",5,20,0.8,Independent,Loser,Yes,M,21500,55800,103200
+5,"Armstrong, Joseph M.",9,13,0.590909091,Republican,Loser,Yes,M,35900,94800,167900
+6,"Arute, Kristen Gail",182,121,0.399339934,Democrat,Loser,Yes,F,36200,105500,216500
+7,"Ashe, Brian M.",123,127,0.508,Democrat,Winner,Yes,M,38400,86500,161400
+8,"Ayers, Bruce J.",117,213,0.645454545,Democrat,Winner,No,M,27500,71900,127200
+9,"Balser, Ruth B.",101,133,0.568376068,Democrat,Winner,No,F,52700,142200,250000
+10,"Barber, Christine P.",63,298,0.825484765,Democrat,Winner,No,F,23900,75200,137400
+11,"Barrett, III, John",45,127,0.738372093,Republican,Winner,No,M,19900,50100,97600
+12,"Barrows, Fred J.",6,4,0.4,Republican,Winner,No,M,42600,95500,160000
+13,"Beaty, Jr., Ronald R.",27,3,0.1,Democrat,Loser,Yes,M,39200,85500,140600
+14,"Benson, Jennifer",42,300,0.877192982,Republican,Winner,No,F,46800,104600,198200
+15,"Berthiaume, Jr., Donald R.",41,57,0.581632653,Democrat,Winner,Yes,M,28300,67000,81800
+16,"Bezanson, Alex",206,221,0.517564403,Republican,Loser,Yes,M,35900,77600,131400
+17,"Biagetti, Sandra E. Slattery",48,82,0.630769231,Democrat,Loser,Yes,F,36400,85600,153400
+18,"Biele, David M.",101,235,0.699404762,Democrat,Winner,Yes,M,21100,83400,161500
+19,"Blais, Natalie M.",109,244,0.69121813,Republican,Winner,Yes,F,26500,65000,119100
+20,"Blandford, Tom J.M.",19,32,0.62745098,Democrat,Loser,Write-In Style,M,36000,88500,156400
+21,"Bloomenthal, Benjamin Elliot",8,18,0.692307692,Republican,Loser,Yes,M,52700,128300,237400
+22,"Boldyga, Nick",55,81,0.595588235,Democrat,Winner,Yes,M,25800,65700,124400
+23,"Bradford, Forrest W.",15,13,0.464285714,Democrat,Loser,Yes,M,25800,65700,124400
+24,"Brodeur, Paul",81,250,0.755287009,Democrat,Winner,No,M,16600,56600,108400
+25,"Bruce, Suezanne P.",5,47,0.903846154,Republican,Loser,Yes,F,10700,42000,143000
+26,"Buckley, Erin M.",13,47,0.783333333,Democrat,Loser,Yes,F,41400,96300,155600
+27,"Burke, William F.",3,35,0.921052632,Democrat,Loser,Yes,M,24600,63900,127100
+28,"Cabral, Antonio F. D.",73,329,0.81840796,Democrat,Winner,Yes,M,13800,36200,76800
+29,"Cahill, Daniel F.",28,200,0.877192982,Democrat,Winner,No,M,19200,52000,103800
+30,"Campbell, Linda Dean",46,85,0.648854962,Democrat,Winner,Yes,F,31800,77300,136500
+31,"Capano, Pete",99,175,0.638686131,Democrat,Winner,Yes,M,14200,44800,103800
+32,"Carey, Daniel R.",120,160,0.571428571,Republican,Winner,Yes,M,26600,63100,115800
+33,"Casey, Patrick R.",79,162,0.67219917,Democrat,Loser,Yes,M,45000,106300,195400
+34,"Cassidy, Gerard J.",39,198,0.835443038,Republican,Winner,Yes,M,14900,40700,86800
+35,"Chamberland, Ryan",20,92,0.821428571,Democrat,Loser,Yes,M,39800,87000,144800
+36,"Chan, Tackey",130,542,0.806547619,Democrat,Winner,Yes,M,24600,63900,127100
+37,"Ciccolo, Michelle",362,260,0.418006431,Democrat,Winner,Yes,F,44600,124000,250000
+38,"Clemons Muhammad, Charles",17,14,0.451612903,Democrat,Loser,Yes,M,12800,47500,113100
+39,"Cohen, Matthew S.",32,25,0.438596491,Republican,Loser,Yes,M,44600,124000,250000
+40,"Colarusso, Caroline",124,112,0.474576271,Independent,Loser,Yes,F,41800,108300,214900
+41,"Coller, Michael A.",2,0,0,Democrat,Loser,Yes,M,37600,89000,153600
+42,"Connolly, Michael L.",196,423,0.683360258,Democrat,Winner,No,M,19800,70500,139700
+43,"Coppinger, Edward F.",246,288,0.539325843,Democrat,Winner,No,M,39500,99400,188700
+44,"Costello, Sean P.",168,173,0.507331378,Democrat,Loser,Yes,M,35900,94800,167900
+45,"Crescenzo, Matthew P.",21,75,0.78125,Republican,Loser,Yes,M,37600,89000,153600
+46,"Crocker, Jr., William L.",131,418,0.761384335,Democrat,Winner,Yes,M,24800,61000,112400
+47,"Cronin, Claire",151,396,0.723948812,Republican,Winner,No,F,29300,71700,140700
+48,"Cruz, John F.",30,45,0.6,Democrat,Loser,Yes,M,26800,65400,113700
+49,"Cullinane, Dan",62,479,0.885397412,Democrat,Winner,Yes,M,19800,59100,121800
+50,"Cusack, Mark James",76,292,0.793478261,Democrat,Winner,No,M,31700,80000,140600
+51,"Cusack, Paul J.",47,368,0.886746988,Democrat,Loser,Yes,M,24800,61000,112400
+52,"Cutler, Josh",150,165,0.523809524,Republican,Winner,No,M,46500,101300,171800
+53,"D'Emilia, Angelo L.",67,46,0.407079646,Democrat,Winner,Yes,M,33600,86000,152100
+54,"Day, Michael S.",295,347,0.540498442,Democrat,Winner,Yes,M,41800,108300,214900
+55,"Decker, Marjorie C.",123,259,0.678010471,Republican,Winner,Yes,F,32200,81200,164800
+56,"DeCoste, David F.",92,68,0.425,Democrat,Winner,Yes,M,36500,87600,175100
+57,"DeLeo, Robert A.",191,3594,0.949537649,Democrat,Winner,No,M,20800,54800,105800
+58,"Demers, Joseph E.",103,63,0.379518072,Democrat,Loser,Yes,M,34800,87300,154900
+59,"Demong, Alison",191,129,0.403125,Democrat,Loser,Yes,F,36500,87600,175100
+60,"Devers, Marcos A.",35,60,0.631578947,Democrat,Winner,Yes,M,13300,36300,76900
+61,"Doktor, Christine M.",21,92,0.814159292,Democrat,Loser,Yes,F,26500,65000,119100
+62,"Domb, Mindy",116,79,0.405128205,Democrat,Winner,Yes,F,16900,50100,124400
+63,"Donahue, Daniel M.",14,120,0.895522388,Democrat,Winner,No,M,16600,43500,89200
+64,"Donato, Paul J.",216,595,0.733662145,Republican,Winner,No,M,27000,69200,129500
+65,"Dooley, Shawn C.",96,136,0.586206897,Democrat,Winner,Yes,M,46500,105800,195800
+66,"Dotson, Terry Burke",1,1,0.5,Democrat,Loser,Yes,F,30800,71100,129800
+67,"Driscoll, Jr., William J.",60,151,0.71563981,Democrat,Winner,No,M,35500,89000,181700
+68,"DuBois, Michelle Marie",37,122,0.767295597,Republican,Winner,Yes,F,26800,65400,113700
+69,"Durant, Peter J.",3,7,0.7,Democrat,Winner,No,M,24700,61100,117100
+70,"Dykema, Carolyn Coyne",86,48,0.358208955,Republican,Winner,No,F,54900,126700,223000
+71,"Eaton, Gregory A.",48,33,0.407407407,Democrat,Loser,Yes,M,35900,77600,131400
+72,"Eckert, Christina",284,196,0.408333333,Democrat,Loser,Yes,F,43500,100600,178100
+73,"Edwards, Jonathan S.",4,32,0.888888889,Democrat,Loser,Yes,M,26500,65000,119100
+74,"Ehrlich, Lori",133,103,0.436440678,Democrat,Winner,No,F,33300,92600,187800
+75,"Elugardo, Nika Carlene",298,926,0.756535948,Republican,Winner,Yes,F,16700,62700,134200
+76,"Eubanks-Archbold, Elmer",19,41,0.683333333,Green-Rainbow,Loser,Yes,M,18900,50900,101100
+77,"Factor, Daniel L.",4,20,0.833333333,Democrat,Loser,Yes,M,52700,128300,237400
+78,"Farley-Bouvier, Tricia",70,119,0.62962963,Democrat,Winner,No,F,17300,44400,91900
+79,"Farrer, Emily",47,102,0.684563758,Democrat,Loser,Yes,F,22600,54500,107400
+80,"Feeney, Mary Kate",19,45,0.703125,Republican,Loser,Write-In Style,F,36000,88500,156400
+81,"Ferguson, Kimberly",27,44,0.61971831,Democrat,Winner,Yes,F,50000,101000,169400
+82,"Fernandes, Dylan",16,226,0.933884298,Democrat,Winner,No,M,30200,72900,138800
+83,"Ferrante, Ann-Margaret",36,333,0.902439024,Republican,Winner,Yes,F,25700,67700,133700
+84,"Ferro, Paul R.",55,149,0.730392157,Democrat,Loser,Yes,M,31900,77900,146800
+85,"Finn, Michael J.",39,133,0.773255814,Democrat,Winner,No,M,20600,47500,98600
+86,"Fiola, Carole",278,305,0.523156089,Independent,Winner,Yes,F,16800,44200,93400
+87,"Flannery, Donald J.",2,12,0.857142857,Democrat,Loser,Yes,M,29400,71600,127800
+88,"Frawley, Allin J.",38,54,0.586956522,Republican,Loser,Yes,M,38500,86100,139800
+89,"Frost, Paul K.",51,96,0.653061224,Republican,Winner,Yes,M,30800,71100,129800
+90,"Fullen, Paul John",30,119,0.798657718,Democrat,Loser,Yes,M,17400,47300,103400
+91,"Galvin, William C.",37,95,0.71969697,Democrat,Winner,No,M,31100,80100,157800
+92,"Garballey, Sean",295,459,0.608753316,Democrat,Winner,Yes,M,36900,94400,182500
+93,"Garlick, Denise",411,428,0.510131108,Progressive Party,Winner,Yes,F,62500,146400,250000
+94,"Garrison, Althea",0,4,1,Democrat,Loser,Yes,F,12300,39000,85700
+95,"Garry, Colleen M.",214,118,0.355421687,Democrat,Winner,Yes,F,41700,90700,157300
+96,"Gatlin, Michael G.",46,19,0.292307692,Democrat,Loser,Write-In Style,M,36000,88500,156400
+97,"Gemme, Pamela",6,44,0.88,Democrat,Loser,Yes,F,17400,47300,103400
+98,"Gentile, Carmine",43,34,0.441558442,Republican,Winner,No,M,42800,122200,235100
+99,"Gifford, Susan D. Williams",85,106,0.554973822,Democrat,Winner,Yes,F,30200,69900,119000
+100,"Golden Jr., Thomas A.",59,681,0.92027027,Independent,Winner,No,M,20000,56900,117800
+101,"Goldstein-Rose, Solomon",33,18,0.352941176,Unaffiliated,Loser,Yes,M,16900,50100,124400
+102,"Gonsalves, Anand D.",24,32,0.571428571,Democrat,Loser,Yes,M,31800,77300,136500
+103,"Gonzalez, Carlos",9,103,0.919642857,Democrat,Winner,No,M,9600,20000,51800
+104,"Gordon, Kenneth I.",65,94,0.591194969,Democrat,Winner,No,M,46500,101400,192600
+105,"Gouveia, Tami L.",168,274,0.619909502,Republican,Winner,Yes,F,52700,128300,237400
+106,"Gravel, Edward A.",37,80,0.683760684,Democrat,Loser,Yes,M,22500,58400,108600
+107,"Gregoire, Danielle W.",35,178,0.835680751,Democrat,Winner,Yes,F,31900,77900,146800
+108,"Gustavson, Allison M.",337,425,0.557742782,Democrat,Loser,Yes,F,36300,93900,194600
+109,"Haddad, Patricia A.",74,293,0.798365123,Democrat,Winner,No,F,27000,67300,120700
+110,"Haggerty, Richard M.",134,172,0.562091503,Republican,Winner,Yes,M,34800,87300,154900
+111,"Hall, Julie A.",101,152,0.600790514,Democrat,Loser,Yes,F,26500,67500,126600
+112,"Hamlin, Brian",31,18,0.367346939,Republican,Loser,Yes,M,46500,105800,195800
+113,"Harrington, Sheila C.",34,19,0.358490566,Democrat,Winner,No,F,41100,93300,161800
+114,"Hawkins, James K.",59,190,0.763052209,Democrat,Winner,Yes,M,26500,67500,126600
+115,"Hay, Stephan",70,109,0.608938547,Democrat,Winner,Yes,M,18900,50900,101100
+116,"Hecht, Jonathan",0,3,1,Democrat,Winner,No,M,40500,93500,168900
+117,"Heisey, Sabrina",41,274,0.86984127,Democrat,Loser,Yes,F,41700,90700,157300
+118,"Hendricks, Christopher",50,182,0.784482759,Democrat,Winner,Yes,M,17600,45100,91600
+119,"Hewins, Sarah G.",93,69,0.425925926,Democrat,Loser,Yes,F,30200,69900,119000
+120,"Higgins, Kevin Michael",35,92,0.724409449,Democrat,Loser,Yes,M,35900,77600,131400
+121,"Higgins, Natalie Marie",88,226,0.719745223,Republican,Winner,Yes,F,20600,56500,107200
+122,"Hill, Bradford R.",355,156,0.305283757,Democrat,Winner,Yes,M,36300,93900,194600
+123,"Hine, John R.",61,52,0.460176991,Democrat,Loser,Yes,M,26600,63100,115800
+124,"Hogan, Kate",139,364,0.723658052,Democrat,Winner,Yes,F,35700,95800,180600
+125,"Holmes, Russell",3,12,0.8,Democrat,Winner,No,M,12900,42600,93200
+126,"Honan, Kevin G.",40,348,0.896907216,Democrat,Winner,No,M,12400,49500,106200
+127,"Howell, Darrin D.",49,292,0.856304985,Republican,Loser,Yes,M,12300,39000,85700
+128,"Howitt, Steven",12,86,0.87755102,Democrat,Winner,No,M,45200,90500,146700
+129,"Hunt, Daniel J.",48,366,0.884057971,Republican,Winner,No,M,19600,62400,125900
+130,"Hunt, Randy",118,156,0.569343066,Democrat,Winner,Yes,M,39200,85500,140600
+131,"Idowu, Oluwasegun",24,295,0.92476489,Independent,Loser,Yes,M,24200,63700,126200
+132,"Janson, Michael",1,0,0,Democrat,Loser,Yes,M,13800,36200,76800
+133,"Johnson, Erika F.",18,36,0.666666667,Republican,Loser,Yes,F,41400,96300,155600
+134,"Jones Jr., Bradley H.",105,308,0.745762712,Democrat,Winner,No,M,55200,119000,207300
+135,"Kafka, Louis L.",70,159,0.694323144,Republican,Winner,No,M,44600,105500,190200
+136,"Kane, Hannah",316,261,0.452339688,Democrat,Winner,No,F,45800,106300,194700
+137,"Kearney, Patrick J.",136,362,0.726907631,Democrat,Winner,Yes,M,35900,94800,167900
+138,"Keefe, Mary S.",39,146,0.789189189,Republican,Winner,No,F,11100,34300,75100
+139,"Kelcourse, James M.",483,255,0.345528455,Democrat,Winner,Yes,M,32100,77000,151700
+140,"Kenyon, Mark A.",2,6,0.75,Democrat,Loser,Yes,M,16300,43400,89300
+141,"Khan, Kay S.",4,10,0.714285714,Green-Rainbow,Winner,No,F,46400,124200,250000
+142,"Khdeer, Yasmine",2,6,0.75,Democrat,Loser,Yes,F,22500,58400,108600
+143,"Koczera, Robert M.",14,41,0.745454545,Democrat,Loser,Yes,M,17600,45100,91600
+144,"Kratman, Mark S.",27,83,0.754545455,Democrat,Loser,Yes,M,41400,96300,155600
+145,"Krueger, Christian W.",11,15,0.576923077,Democrat,Loser,Yes,M,52700,128300,237400
+146,"Lacet, Jovan",14,38,0.730769231,Democrat,Loser,Yes,M,19800,59100,121800
+147,"Lahiff, Joseph G.",34,87,0.719008264,Democrat,Loser,Yes,M,44600,124000,250000
+148,"LaNatra, Kathleen R.",137,172,0.556634304,Democrat,Winner,Yes,F,31000,79500,138600
+149,"Landry, Anne DJ",67,250,0.788643533,Democrat,Loser,Yes,F,34800,87300,154900
+150,"Lantigua, William",108,218,0.668711656,Democrat,Loser,Yes,M,13300,36300,76900
+151,"Lawn, John",23,132,0.851612903,Democrat,Winner,No,M,29000,77800,233300
+152,"Leary, James",80,111,0.581151832,Democrat,Loser,Yes,M,14500,42400,92100
+153,"LeBoeuf, David Henry Argosky",54,406,0.882608696,Republican,Winner,Yes,M,17400,47300,103400
+154,"Leczynski, Raymond G.",62,36,0.367346939,Democrat,Loser,Yes,M,41700,90700,157300
+155,"Leibowitz, Steven M.",17,129,0.883561644,Democrat,Loser,Yes,M,26500,59100,112000
+156,"Lennon, Lori",37,206,0.847736626,Democrat,Loser,Yes,F,36900,94400,182500
+157,"Lewis, Jack Patrick",86,293,0.773087071,Democrat,Winner,No,M,22000,61600,143200
+158,"Linsky, David P.",2,13,0.866666667,Democrat,Winner,No,M,45100,106400,195700
+159,"Livingstone, Jay",135,113,0.455645161,Republican,Winner,No,M,31100,98800,200700
+160,"Lombardo, Marc",179,93,0.341911765,Democrat,Winner,Yes,M,45800,100500,156800
+161,"Loosemore, W. Stuart",25,172,0.873096447,Republican,Loser,Yes,M,17400,47300,103400
+162,"Losco, Ryan R.",32,136,0.80952381,Republican,Loser,Yes,M,29800,70700,135100
+163,"Lynch, Kathleen",119,145,0.549242424,Republican,Loser,Yes,F,55700,122400,201000
+164,"Lyons, James J.",239,543,0.694373402,Democrat,Loser,Yes,M,59800,137900,240000
+165,"Madaro, Adrian",578,927,0.615946844,Democrat,Winner,No,M,20100,52200,106700
+166,"Mahoney, John J.",128,348,0.731092437,Democrat,Loser,Yes,M,36700,82200,151900
+167,"Mahoney, John T.",4,4,0.5,Republican,Winner,No,M,25300,63200,132100
+168,"Malaguti, Claire",2,18,0.9,Democrat,Loser,Yes,F,34800,87300,154900
+169,"Malia, Elizabeth A.",83,238,0.741433022,Democrat,Winner,Yes,F,12800,47500,113100
+170,"Malone, Patrick",169,173,0.505847953,Democrat,Loser,Yes,M,39800,87000,144800
+171,"Marciano, Euplio Ricardo",1,0,0,Unaffiliated,Loser,Yes,M,27000,73800,146200
+172,"Marcinczyk, Jr., Stanley P.",6,31,0.837837838,Democrat,Loser,Yes,M,37600,79700,147500
+173,"Mariano, Ronald",54,688,0.92722372,Democrat,Winner,Yes,M,26800,67800,121700
+174,"Mark, Paul",129,298,0.697892272,Democrat,Winner,No,M,23900,54000,98600
+175,"Markey, Christopher M.",19,81,0.81,Democrat,Winner,No,M,19500,62200,125000
+176,"Mason, Joshua",15,49,0.765625,Democrat,Loser,Yes,M,26500,59100,112000
+177,"McCourt, P. Marie",38,62,0.62,Democrat,Loser,Yes,F,26600,63100,115800
+178,"McCoy, Michael V.",6,0,0,Republican,Loser,Yes,M,41400,96300,155600
+179,"McDonald, John G.",39,77,0.663793103,Democrat,Loser,Yes,M,40000,100900,203100
+180,"McGonagle, Joseph W.",91,247,0.730769231,Republican,Winner,Yes,M,22800,52500,99000
+181,"McKenna, Joseph D.",7,20,0.740740741,Democrat,Winner,No,M,29000,69300,128400
+182,"McMurtry, Paul",438,260,0.372492837,Democrat,Winner,Yes,M,40000,100900,203100
+183,"Meas, Sam S.",30,57,0.655172414,Democrat,Loser,Yes,M,14500,42400,92100
+184,"Meschino, Joan",355,280,0.440944882,Unaffiliated,Winner,Yes,F,36200,105500,216500
+185,"Meuse, Patricia M. W.",4,3,0.428571429,Republican,Loser,Yes,F,41400,96300,155600
+186,"Mezzina, Mark Bingham",60,160,0.727272727,Democrat,Loser,Yes,M,34000,83500,153900
+187,"Michlewitz, Aaron",417,779,0.651337793,Democrat,Winner,No,M,22500,88900,193400
+188,"Minicucci, Christina A.",111,269,0.707894737,Democrat,Winner,Yes,F,29800,70700,135100
+189,"Miranda, Elizabeth",123,752,0.859428571,Republican,Winner,Yes,F,12300,39000,85700
+190,"Mirra, Leonard",47,26,0.356164384,Democrat,Winner,Yes,M,43500,100600,178100
+191,"Mom, Rady",24,100,0.806451613,Green-Rainbow,Winner,Yes,M,14500,42400,92100
+192,"Moncreaff, Matthew O.",5,25,0.833333333,Democrat,Loser,Yes,M,50000,101000,169400
+193,"Moran, Frank",9,57,0.863636364,Democrat,Winner,No,M,14800,46900,116700
+194,"Moran, Michael J.",75,706,0.90396927,Democrat,Winner,No,M,17200,61500,13200
+195,"Muradian, Jr., David Kent",199,330,0.623818526,Republican,Winner,No,M,33500,87100,166200
+196,"Muratore, Mathew J.",152,204,0.573033708,Democrat,Winner,Yes,M,36700,82200,151900
+197,"Murphy, James",37,183,0.831818182,Democrat,Winner,No,M,29100,68300,131600
+198,"Murray, Brian W.",190,62,0.246031746,Democrat,Winner,Yes,M,36400,85600,153400
+199,"Nakajima, Eric T.",139,136,0.494545455,Democrat,Loser,Yes,M,16900,50100,124400
+200,"Nangle, David M.",181,461,0.718068536,Independent,Winner,No,M,18000,52200,113400
+201,"Naughton, Harold P.",166,425,0.719120135,Democrat,Winner,Yes,M,37600,79700,147500
+202,"Neslusan, Tanya V.",50,211,0.808429119,Democrat,Loser,Yes,F,26200,63200,122200
+203,"Net, Hong L.",40,110,0.733333333,Democrat,Loser,Yes,M,14200,44800,103800
+204,"Nguyen, Tram",427,1290,0.751310425,Democrat,Winner,Yes,F,59800,137900,240000
+205,"Nzenwa, Christopher O.",1,14,0.933333333,Republican,Loser,Yes,M,24200,63700,126200
+206,"O'Connell, Edward J.",65,93,0.588607595,Democrat,Loser,Yes,M,35900,94800,167900
+207,"O'Connell, Judith L.",28,18,0.391304348,Republican,Loser,Yes,F,41400,96300,155600
+208,"O'Connell, Shaunna",269,545,0.66953317,Democrat,Winner,Yes,F,22600,54500,107400
+209,"O'Day, James J.",29,245,0.894160584,Repubican,Winner,No,M,20000,54100,105500
+210,"Orrall, Norman J.",83,119,0.589108911,Democrat,Winner,Yes,M,38500,86100,139800
+211,"Owens, Roy",3,1,0.25,Unaffiliated,Loser,Yes,M,12300,39000,85700
+212,"Paglia, Donato H.",1,0,0,Republican,Loser,Yes,M,27000,73800,146200
+213,"Palmieri, Richard E.",54,93,0.632653061,Democrat,Loser,Yes,M,20600,56500,107200
+214,"Parisella, Jerald A.",190,210,0.525,Democrat,Winner,Yes,M,27000,73800,146200
+215,"Peake, Sarah K.",65,180,0.734693878,Democrat,Winner,No,F,24500,61600,114700
+216,"Pease, Casey T.",45,103,0.695945946,Democrat,Loser,Yes,M,26500,65000,119100
+217,"Peisch, Alice Hanlon",52,85,0.620437956,Republican,Winner,No,F,69400,178800,250000
+218,"Peltier, Donald",2,1,0.333333333,Democrat,Loser,Yes,M,26600,63100,115800
+219,"Petrolati, Thomas M.",103,140,0.576131687,Democrat,Winner,No,M,28000,63000,119100
+220,"Phillips, Lesley R.",5,10,0.666666667,Democrat,Loser,Yes,F,32200,81200,164800
+221,"Pignatelli, William",212,349,0.622103387,Republican,Winner,No,M,28800,64700,125000
+222,"Poirier, Elizabeth A.",81,75,0.480769231,Independent,Winner,No,F,39700,86800,152700
+223,"Powell, Nathaniel K.",25,34,0.576271186,Republican,Loser,Yes,M,35900,94800,167900
+224,"Prinzivalli, Giuseppina (Pina)",52,149,0.741293532,Democrat,Loser,Yes,F,41400,96300,155600
+225,"Provost, Denise",22,54,0.710526316,Democrat,Winner,No,F,42900,86700,150900
+226,"Puppolo Jr., Angelo J.",108,463,0.810858144,Democrat,Winner,Yes,M,29400,71600,127800
+227,"Remillard, Darryn Elliot",23,110,0.827067669,Democrat,Loser,Yes,M,34800,87300,154900
+228,"Reynolds, Sara-Lynn",7,3,0.3,Democrat,Loser,Yes,F,26500,67500,126600
+229,"Robertson, David A.",94,79,0.456647399,Democrat,Winner,Yes,M,41400,96300,155600
+230,"Robinson, Maria D.",63,256,0.802507837,Democrat,Winner,Write-In Style,F,36000,88500,156400
+231,"Rocco-Runnion, Jennifer",244,63,0.205211726,Democrat,Loser,Yes,F,32100,77000,151700
+232,"Rogers, David M.",28,105,0.789473684,Democrat,Winner,No,M,38700,104500,205300
+233,"Rogers, John H.",24,135,0.849056604,Democrat,Winner,No,M,36300,89700,158900
+234,"Roy, Jeffrey N.",132,306,0.698630137,Democrat,Winner,Yes,M,45000,106300,195400
+235,"Rushing, Byron",47,232,0.831541219,Democrat,Loser,Yes,M,10700,42000,143000
+236,"Russo, Andrew J.",183,494,0.729689808,Democrat,Loser,Yes,M,14200,44800,103800
+237,"Rusteika, Matthew S.",111,122,0.52360515,Democrat,Loser,Yes,M,21100,83400,161500
+238,"Ryan, Daniel Joseph",55,507,0.902135231,Democrat,Winner,No,M,17900,61700,140200
+239,"Sabadosa, Lindsay N.",200,196,0.494949495,Democrat,Winner,Yes,F,25800,64900,125500
+240,"Sanchez, Jeffrey",121,1764,0.935809019,Democrat,Loser,Yes,M,16700,62700,134200
+241,"Santiago, Jon",73,212,0.743859649,Democrat,Winner,Yes,M,10700,42000,143000
+242,"Scaccia, Angelo M.",141,276,0.661870504,Republican,Winner,Yes,M,24200,63700,126200
+243,"Schmaling, Summer K.",58,78,0.573529412,Democrat,Loser,Yes,F,31000,79500,138600
+244,"Schmid III, Paul A.",89,327,0.786057692,Democrat,Winner,No,M,24900,63600,117400
+245,"Silvia, Alan",106,346,0.765486726,Democrat,Winner,No,M,12300,30900,66100
+246,"Smith, Stephen Stat",1,3,0.75,Republican,Loser,Yes,M,22800,52500,99000
+247,"Smola, Todd M.",55,113,0.672619048,Republican,Winner,Yes,M,26200,63200,122200
+248,"Soter, Michael J.",113,153,0.57518797,Democrat,Winner,Yes,M,39800,87000,144800
+249,"Speliotis, Theodore C.",53,223,0.807971014,Democrat,Winner,Yes,M,34000,83500,153900
+250,"Stanley, Thomas M.",347,315,0.475830816,Democrat,Winner,No,M,38900,95600,174000
+251,"Stanton Jr., John A.",119,223,0.652046784,Democrat,Loser,Yes,M,39200,85500,140600
+252,"Steinberg, Theodore L.",32,99,0.755725191,Republican,Loser,Yes,M,62500,146400,250000
+253,"Steinhof, David",23,71,0.755319149,Democrat,Loser,Yes,M,16800,44200,93400
+254,"Stewart, Mary Ann",76,159,0.676595745,Democrat,Loser,Yes,F,44600,124000,250000
+255,"Stone, Rebecca",113,131,0.536885246,Democrat,Loser,Yes,F,30700,96400,191100
+256,"Straus, William M.",72,193,0.728301887,Democrat,Winner,No,M,22800,62500,128900
+257,"Strauss, Jean A.",100,180,0.642857143,Republican,Loser,Yes,F,28300,67000,81800
+258,"Sullivan, Alyson M.",116,177,0.604095563,Democrat,Winner,Yes,F,35900,77600,131400
+259,"Sweeney, William J.",24,64,0.727272727,Democrat,Loser,Yes,M,44600,124000,250000
+260,"Szynal, Diana M.",166,149,0.473015873,Democrat,Loser,Yes,F,25800,64900,125500
+261,"Tagliaferri, Kevin J.",37,70,0.654205607,Democrat,Loser,Yes,M,39800,87000,144800
+262,"Tilden, Mark S.",17,35,0.673076923,Democrat,Loser,Write-In Style,M,36000,88500,156400
+263,"Tosado, Jose F.",24,199,0.892376682,Republican,Winner,Yes,M,16300,43400,89300
+264,"Tougas, Stephen F.",2,19,0.904761905,Democrat,Loser,Yes,M,26800,67800,121700
+265,"Tribou, Christopher J.",74,44,0.372881356,Republican,Loser,Yes,M,45800,100500,156800
+266,"Truschelli, Joseph M.",27,88,0.765217391,Democrat,Loser,Yes,M,31000,79500,138600
+267,"Tucker, Paul F.",128,247,0.658666667,Democrat,Winner,No,M,20000,61100,114200
+268,"Turnbull, Ture R.",23,141,0.859756098,Democrat,Loser,Yes,M,12800,47500,113100
+269,"Tyler, Chynah",12,81,0.870967742,Democrat,Winner,No,F,7800,28100,70700
+270,"Ultrino, Steven",105,143,0.576612903,Democrat,Winner,No,M,16600,56600,108400
+271,"Uong, Rithy",132,179,0.575562701,Democrat,Loser,Yes,M,14500,42400,92100
+272,"Uy, Virak",4,9,0.692307692,Democrat,Loser,Yes,M,24200,63700,126200
+273,"Van Ness, Gretchen",53,244,0.821548822,Democrat,Loser,Yes,F,24200,63700,126200
+274,"Vargas, Andres X.",172,596,0.776041667,Democrat,Winner,No,M,22300,57100,118200
+275,"Vega, Aaron",127,266,0.676844784,Democrat,Winner,No,M,12300,38800,91000
+276,"Velis, John Christopher",132,112,0.459016393,Republican,Winner,No,M,27600,63000,114500
+277,"Vieira, David T.",61,91,0.598684211,Democrat,Winner,No,M,29100,69200,125100
+278,"Vincent, Roselee",35,164,0.824120603,Democrat,Winner,No,F,25400,56300,107100
+279,"Vitolo, Thomas J.",152,210,0.580110497,Democrat,Winner,Yes,M,30700,96400,191100
+280,"Wagner, Joseph F.",80,550,0.873015873,Democrat,Winner,No,M,20700,47500,93100
+281,"Walsh, Thomas P.",27,89,0.767241379,Democrat,Winner,No,M,23400,58200,114500
+282,"Waring, Nathaniel G.",7,7,0.5,Republican,Loser,Yes,M,26500,65000,119100
+283,"Werder, Allison",170,90,0.346153846,Republican,Loser,Yes,F,38400,86500,161400
+284,"Whelan, Timothy R.",195,450,0.697674419,Independent,Winner,Yes,M,26500,59100,112000
+285,"Whipps, Susannah M.",46,33,0.417721519,Democrat,Winner,Yes,F,21500,55800,103200
+286,"Williams, Bud L.",33,228,0.873563218,Democrat,Winner,No,M,13300,36100,71500
+287,"Wisnewski, Francia E.",48,184,0.793103448,Republican,Loser,Yes,F,26500,65000,119100
+288,"Wong, Donald H.",65,169,0.722222222,Democrat,Winner,Yes,M,37600,89000,153600
+289,"Yarid Ferry, Lisa",36,83,0.697478992,Democrat,Loser,Yes,F,29800,70700,135100
+290,"Zlotnik, Jonathan David",162,106,0.395522388,Democrat,Winner,Yes,M,22500,58400,108600
