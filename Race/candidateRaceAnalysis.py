@@ -6,11 +6,10 @@ from collections import Counter
 from matplotlib import pyplot as plt
 
 #Loading race proportion and overall data
-props = np.load('houseFinalOutput.npy')
-names = pd.read_excel("C:\devel\CampaignFinances\Locater\house_full_individual.xlsx")
+props = np.load('houseFinalOutputNew.npy')
+names = pd.read_excel("C:/devel/CampaignFinances/Locater/house_full_individual.xlsx")
 
 #Adusting blank lines at end of names
-names = names[0:len(props)]
 data = names.to_numpy()
 
 print('loaded')
@@ -21,7 +20,7 @@ races = ["White","Black","Asian","Hispanic"]
 #Where rl is location with rep names
 rl = 0
 #Getting counts
-repCount = Counter(data[:,rl])
+repCount = Counter(names.Filer_Full_Name_Reverse)
 reps = list(repCount.keys())
 
 """
@@ -43,7 +42,7 @@ repProps = np.zeros((len(reps),4))
 #For each rep
 for i in range(len(reps)):
     #Finding location of all that reps donors
-    locs = np.where(data[:,rl] == reps[i])[0]
+    locs = np.where(names.Filer_Full_Name_Reverse == reps[i])[0]
 
     #Add each donors race proportions to a matrix
     tempProps = np.zeros((len(locs),4))
@@ -57,12 +56,12 @@ for i in range(len(reps)):
 # Rep proportions by in and out of district
 inRepProps = np.zeros((len(reps),4))
 outRepProps = np.zeros((len(reps),4))
-
+"""
 # For each rep
 for i in range(len(reps)):
     
     # Finding location of all that reps donors
-    locs = np.where(data[:,rl] == reps[i])[0]
+    locs = np.where(names.Filer_Full_Name_Reverse == reps[i])[0]
 
     # Arrays of toDelete for in and out of district cases
     toDeleteForIn = np.array([])
@@ -102,9 +101,10 @@ for i in range(len(reps)):
 
     outRepRow = sum(outTempProps)/sum(sum(outTempProps))
     outRepProps[i] = outRepRow
-    
+ """   
 """
 Out of district, disregarding race... just to reference
+"""
 """
 #Location of donor district and rep district
 #For each rep
@@ -122,7 +122,7 @@ for i in range(len(reps)):
             oodTemp = oodTemp+1
 
     oiRatio[i] = oodTemp/indTemp
-    
+ """   
 """Combining these for all w/ in district vs out for each rep"""
 
 def color_boxplot(data, color, pos=[0], ax=None):

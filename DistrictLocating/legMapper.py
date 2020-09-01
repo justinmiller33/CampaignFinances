@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-sf = shapefile.Reader("C:\devel\CampaignFinances\Locater\senate2012\SENATE2012_POLY.shp")
+sf = shapefile.Reader("C:/devel/CampaignFinances/Locater/senate2012/SENATE2012_POLY.shp")
 
 for k in range(1,41):
     for j in range(k):

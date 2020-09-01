@@ -1,7 +1,6 @@
 # BISG
 import numpy as np
 import pandas as pd
-import wikipedia
 import re
 
 # Load in demographic data
