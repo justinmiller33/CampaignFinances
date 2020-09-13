@@ -1,5 +1,5 @@
 # CampaignFinances
-Ongoing research on the inequalities present in campaign fundraising for Massachusetts State Elections.
+Concluded research on the inequalities present in campaign fundraising for Massachusetts State Elections.
 
 ## Topics of Focus
 **Disparity Caused by Out of District Donations**
@@ -9,6 +9,11 @@ Economic
 Occupational
 
 Racial
+
+## Scripts Cited in Final Report
+**/DistrictLocating/legFinderGlobal.py:** Geolocate and Identify donor's political district from address data.<br>
+**/Race/raceProbs.py:** Generate racial probabilites for each donor based off of US census surname API. <br>
+**/Race/BISG.py:** Improve racial probabilities for each donor by considering the demographics of user town or neighborhood.
 
 ## Navigation
 ### Data Files:
