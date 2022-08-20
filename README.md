@@ -1,5 +1,6 @@
 # CampaignFinances
 Concluded research on the inequalities present in campaign fundraising for Massachusetts State Elections.
+[Final Report.](http://www.inquiriesjournal.com/articles/1864/democratic-misrepresentation-a-quantitative-analysis-of-out-of-district-state-campaign-fundraising)
 
 ## Topics of Focus
 **Disparity Caused by Out of District Donations**
